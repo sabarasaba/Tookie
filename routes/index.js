@@ -35,7 +35,7 @@ var fetchData = function(res){
         	var array = [];
 
         	async.forEach(urls, function(url, callback){
-        		request(urlContainer, function(error, response, body){
+        		request(url, function(error, response, body){
 					if (!error && response.statusCode == 200) 
 					{
 						for (var i = 0; i < 60; i++) 
@@ -49,7 +49,9 @@ var fetchData = function(res){
 								
 								var element = {url: url, title: title, description: description};
 
-								array.push(element);
+								array.pushIfNotExist(element, function(e) { 
+									return e.title.toLowerCase() === element.title.toLowerCase(); 
+								});
 							}
 							catch(err)
 							{
