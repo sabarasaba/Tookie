@@ -1,8 +1,3 @@
-exports.tubiega = function()
-{
-    return "tubiega! 8===D";
-}
-
 // check if an element exists in array using a comparer function
 // comparer : function(currentElement)
 Array.prototype.inArray = function(comparer) { 
@@ -19,32 +14,6 @@ Array.prototype.pushIfNotExist = function(element, comparer) {
         this.push(element);
     }
 }; 
-
-// Retrieves the first url from a youtube video using a keyword.
-// Usage: setYoutubeTrailer($("#video"), "Half Life 2");
-exports.setYoutubeTrailer = function(container, keyword){
-    var keyword= encodeURIComponent(keyword);
-    var yt_url='http://gdata.youtube.com/feeds/api/videos?q='+keyword+'&format=5&max-results=1&v=2&alt=jsonc';
-
-    $.ajax({
-            type: "GET",
-            url: yt_url,
-            dataType:"jsonp",
-            success: function(response) {
-                if(response.data.items) {
-                    $.each(response.data.items, function(i,data) {
-                        var video_id=data.id;
-                        var video_frame="<iframe width='420' height='236' src='http://www.youtube.com/embed/"+video_id+"' frameborder='0' type='text/html'></iframe>";
-                        r = video_frame;
-
-                        $(container).html(video_frame);
-                    });
-                } else {
-                    $(container).html("<div id='error'>No video was found.</div>");
-                }
-            }
-    });
-}
 
 
 // Sanitize the name of a movie/game/tv-show
