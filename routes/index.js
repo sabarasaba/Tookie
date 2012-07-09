@@ -9,8 +9,6 @@ var request = require('request')
 
 var torrentz = "http://torrentz.eu";
 var imdbAPI = "http://www.imdbapi.com/?i=&t="
-var urlContainer = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ftorrentz.eu%2Fsearch%3Ff%3D%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40class%3D'results'%5D%2Fdl%22&format=json";
-var tzSecUrl = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ftorrentz.eu%2Fsearch%3Ff%3D%26p%3D1%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40class%3D'results'%5D%2Fdl%22&format=json";
 
 var urls = [
 	"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ftorrentz.eu%2Fsearch%3Ff%3D%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40class%3D'results'%5D%2Fdl%22&format=json",
@@ -109,13 +107,4 @@ var fetchData = function(res){
 
 exports.index = function(req, res){
   fetchData(res);
-};
-
-
-var pitulin = function(res){
-	res.render('test', { t: helpers.tubiega()});
-}
-
-exports.test = function(req, res){
-	pitulin(res);
 };
