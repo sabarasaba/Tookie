@@ -1,5 +1,9 @@
 var apiKeyTMDB     = 'dc4940972c268b026150cf7be6f01d11';
 exports.cacheDirectory = './cache/data';
+exports.cacheLogDir = './cache/logs.txt';
+
+var cacheDirectory = '/cache/data';
+var cacheLogDir = '/cache/logs.txt';
 
 var request = require('request')
   , helpers = require('./helpers.js')
@@ -110,11 +114,18 @@ exports.fetchData = function(){
     ],
         // the bonus final callback function
         function(err, status) {
-            fs.writeFile(cacheDirectory, JSON.stringify(status), function(err) {
+            fs.writeFile(__dirname + cacheDirectory, JSON.stringify(status), function(err) {
                 if(err) {
                     console.log(err);
-                } else {
-                    console.log("Cache file updated !");
+                } else 
+                {
+                    fs.open(__dirname + cacheLogDir, 'a', 666, function( e, id ) {
+                        fs.write( id, 'created new cache file at: ' + new Date() + '\n', null, 'utf8', function(){
+                            fs.close(id, function(){
+                                console.log("Cache file updated !");
+                            });
+                        });
+                    });
                 }
             }); 
         }
