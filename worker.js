@@ -1,6 +1,5 @@
-var tickTime       = 10800000;
 var apiKeyTMDB     = 'dc4940972c268b026150cf7be6f01d11';
-var cacheDirectory = './cache/data';
+exports.cacheDirectory = './cache/data';
 
 var request = require('request')
   , helpers = require('./helpers.js')
@@ -26,7 +25,7 @@ var queryIMDB = function(title, description, callback){
     }
 }
 
-var fetchData = function(){
+exports.fetchData = function(){
 
     async.waterfall(
     [
@@ -121,8 +120,3 @@ var fetchData = function(){
         }
     );
 }
-
-   
-setInterval(function () {
-    fetchData();
-}, tickTime);

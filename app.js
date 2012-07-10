@@ -5,7 +5,10 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , http = require('http');
+  , http = require('http')
+  , worker = require('./worker.js');
+
+var tickTime = 10800000;
 
 var app = express();
 
@@ -27,6 +30,11 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+
+/* I can't afford to buy a new dyno in heroku, so I run the worker process directly in the current dyno. */
+setInterval(function () {
+    worker.fetchData();
+}, tickTime);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
