@@ -18,17 +18,6 @@ var urls = [
     "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ftorrentz.eu%2Fsearch%3Ff%3D%26p%3D1%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40class%3D'results'%5D%2Fdl%22&format=json"
 ];
 
-var queryIMDB = function(title, description, callback){
-    if (description.indexOf('movies') !== -1)
-    {
-        request(imdbAPI + title + "&r=json&y=2012", function(error, response, body){
-            var imdb = JSON.parse(body);
-
-            callback(imdb.Poster);
-        });
-    }
-}
-
 exports.fetchData = function(){
 
     async.waterfall(
@@ -70,6 +59,8 @@ exports.fetchData = function(){
                     }
                 });
             }, function(err){
+                if (err)
+                    console.log("first error on callback: " + err);
                 callback(null, array);
             });
         
@@ -108,12 +99,16 @@ exports.fetchData = function(){
                     callback();
 
             }, function(err) {
+                if (err)
+                    console.log("seccond error on callback: " + err);
                 callback(null, array2);
             }); 
         }
     ],
         // the bonus final callback function
         function(err, status) {
+            if (err)
+                console.log("error on finish: " + err);
             fs.writeFile(__dirname + cacheDirectory, JSON.stringify(status), function(err) {
                 if(err) {
                     console.log(err);

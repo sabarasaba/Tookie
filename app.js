@@ -8,7 +8,7 @@ var express = require('express')
   , http = require('http')
   , worker = require('./worker.js');
 
-var tickTime = 10800000;
+var tickTime = 10000;
 
 var app = express();
 
@@ -34,6 +34,7 @@ app.get('/', routes.index);
 
 /* I can't afford to buy a new dyno in heroku, so I run the worker process directly in the current dyno. */
 setInterval(function () {
+    console.log("calling fetchData");
     worker.fetchData();
 }, tickTime);
 
