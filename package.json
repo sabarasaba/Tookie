@@ -1,9 +1,9 @@
 {
   "name": "tookie",
-  "version": "0.0.1",
+  "version": "0.0.1-2",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "3.0.x",
@@ -12,8 +12,9 @@
     "request": "2.9.x",
     "tmdb": "0.0.x"
   },
-  "engines":{
-    "node": "0.8.x",
-    "npm":  "1.1.x"
-  }
+  "engines": {
+    "node": "*",
+    "npm": "*"
+  },
+  "subdomain": "tookie"
 }

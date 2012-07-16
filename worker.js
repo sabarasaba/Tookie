@@ -78,14 +78,19 @@ exports.fetchData = function(){
 
                         try
                         {
-                            if (result[0].posters.length >= 3)
-                                poster = result[0].posters[3].image.url;
+                            var index = helpers.getIndexOfMovie(result);
+
+                            if (result[index].posters.length >= 3)
+                                poster = result[index].posters[3].image.url;
                             else
-                                poster = result[0].posters[result[0].posters.length - 1].image.url;
+                                poster = result[index].posters[result[index].posters.length - 1].image.url;
 
-                            var element = {url: movie.url, title: result[0].name, description: result[0].overview, poster: poster, rating: result[0].rating};
+                            var element = {url: movie.url, title: result[index].name, description: result[index].overview, poster: poster, rating: result[index].rating};
 
-                            array2.push(element);
+                            array2.pushIfNotExist(element, function(e) { 
+                                return e.title.toLowerCase() === element.title.toLowerCase(); 
+                            });
+                            //array2.push(element);
                         }
                         catch(err)
                         {

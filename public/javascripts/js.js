@@ -14,7 +14,11 @@ var setYoutubeTrailer = function(container, keyword){
                         var video_id=data.id;
                         //var video_frame="<iframe width='420' height='236' src='http://www.youtube.com/embed/"+video_id+"' frameborder='0' type='text/html'></iframe>";
                         var video_url="http://www.youtube.com/watch?v="+video_id+"&iv_load_policy=3";
-                        video_url = "<a class='fancybox-media' href='"+video_url+"'>Watch trailer</a>"
+                        if (navigator.userAgent.match(/(iPod|iPhone|iPad)/))
+                            //video_url = "<a href='#'><object><param name='movie' value='"+video_url+"'></param> <embed src='"+video_url+"' type='application/x-shockwave-flash'></embed></object></a>";
+                            video_url = "<a href='"+video_url+"'>Watch trailer</a>";
+                        else
+                            video_url = "<a class='fancybox-media' href='"+video_url+"'>Watch trailer</a>";
 
                         $(container).html(video_url);
                     });

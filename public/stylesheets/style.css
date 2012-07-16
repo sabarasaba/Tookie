@@ -145,11 +145,48 @@
 	border-radius: 10px;
 	opacity:0.7;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 840px) {
 	.rg-caption p{
-		font-size:8px;
+		font-size:10px;
+	}
+	.rg-image{
+		margin-right: 10%;
+	}
+	.rg-content-wrapper{
+		width: 100%;
+	}
+	.rg-stars{
+		display: none;
+	}
+	.rg-score code{
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.rg-image-holder{
+		float: none;
 	}
 	.rg-title{
-		
+		font-size: 25px;
+		text-align: center;
+		margin-left: 0px;
+	}
+	.rg-trailer{
+		text-align: center;
+		padding-left: 0px;
+	}
+	.rg-torrent{
+		text-align: center;
+		padding-left: 0px;
+	}
+	.rg-trailer a{
+		font-size: 25px;
+	}
+	.rg-rating{
+		text-align: center;
+		padding-left: 0px;
+		display: block;		
+	}
+	.rg-torrent a{
+		font-size: 25px;
 	}
 }

@@ -221,7 +221,7 @@ $(function() {
 					
 					$rgGallery.find('div.rg-title').empty().append(title);
 					$rgGallery.find('div.rg-caption').show().children('p').empty().text( description );
-					$rgGallery.find('div.rg-image').empty().append('<img src="' + largesrc + '" width="330" height="450"/>');
+					$rgGallery.find('div.rg-image').empty().append('<img src="' + largesrc + '" />');
 					$rgGallery.find('span.rg-score').empty().append('<code>'+rating+'/10</code>');
 					$rgGallery.find('span.rg-stars').empty().raty({
 						readOnly	: true,

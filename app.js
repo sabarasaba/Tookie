@@ -8,7 +8,7 @@ var express = require('express')
   , http = require('http')
   , worker = require('./worker.js');
 
-var tickTime = 300000;
+var tickTime = 10800000; //3 hours
 
 var app = express();
 
