@@ -7,7 +7,7 @@ Every 3 hours the app runs "a worker" which does a data scrapping process on tor
 Live Site
 ---------
 
-Tookie is currently deployed to nodejitsu. You can check the live site at + http://tookie.jit.su/
+Tookie is currently deployed to nodejitsu. You can check the live site at http://tookie.jit.su/
 
 Author
 -------
@@ -20,4 +20,4 @@ Author
 Copyright and license
 ---------------------
 
-	All under the GNU General Public Licence V3, see [licence.txt](https://github.com/sabarasaba/tookie/blob/master/copyright.txt)
+All under the GNU General Public License V3, see [license.txt](https://github.com/sabarasaba/Tookie/blob/master/license.txt)
