@@ -63,6 +63,11 @@
 	position:relative;
 	display: inline-block;
 }
+.rg-format{
+	padding-left: 30px;
+	margin-top:25px;
+	position:relative;
+}
 .rg-stars{
 	padding-left: 10px;
 }
@@ -185,6 +190,10 @@
 		text-align: center;
 		padding-left: 0px;
 		display: block;		
+	}
+	.rg-format{
+		text-align: center;
+		padding-left: 0px;
 	}
 	.rg-torrent a{
 		font-size: 25px;

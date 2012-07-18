@@ -1,14 +1,5 @@
 $(function() {
 	// ======================= imagesLoaded Plugin ===============================
-	// https://github.com/desandro/imagesloaded
-
-	// $('#my-container').imagesLoaded(myFunction)
-	// execute a callback when all images have loaded.
-	// needed because .load() doesn't work on cached images
-
-	// callback function gets image collection as argument
-	//  this is the container
-
 	// original: mit license. paul irish. 2010.
 	// contributors: Oren Solomianik, David DeSandro, Yiannis Chatzikonstantinou
 
@@ -174,6 +165,16 @@ $(function() {
 						else if (event.keyCode == 37)
 							_navigate( 'left' );	
 					});
+
+					$('#rg-image-wrapper').touchwipe({
+						wipeLeft			: function() {
+							_navigate( 'right' );
+						},
+						wipeRight			: function() {
+							_navigate( 'left' );
+						},
+						preventDefaultEvents: false
+					});
 					
 				}
 				
@@ -215,7 +216,8 @@ $(function() {
 					title		= $thumb.data('title'),
 					rating      = $thumb.data('rating'),
 					description = $thumb.data('description'),
-					torrent     = $thumb.data('torrent');
+					torrent     = $thumb.data('torrent'),
+					format      = $thumb.data('format');
 				
 				$('<img/>').load( function() {
 					
@@ -223,6 +225,7 @@ $(function() {
 					$rgGallery.find('div.rg-caption').show().children('p').empty().text( description );
 					$rgGallery.find('div.rg-image').empty().append('<img src="' + largesrc + '" />');
 					$rgGallery.find('span.rg-score').empty().append('<code>'+rating+'/10</code>');
+					$rgGallery.find('div.rg-format').empty().append('<span>Format: '+ format +'</span>');
 					$rgGallery.find('span.rg-stars').empty().raty({
 						readOnly	: true,
 						half  		: true,
@@ -230,8 +233,8 @@ $(function() {
 						score		: rating
 					});
 					
-					$rgGallery.find('div.rg-torrent').empty().append('<a href="'+torrent+'" target="_blank"> Download Torrent</a>');
-					setYoutubeTrailer($rgGallery.find('div.rg-trailer').empty(), title);
+					$rgGallery.find('div.rg-torrent').empty().append('<a href="'+torrent+'"> Download Torrent</a>');
+					setYoutubeTrailer($rgGallery.find('div.rg-trailer').empty(), title + "trailer");
 					
 					$loader.hide();
 					
