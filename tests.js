@@ -1,3 +1,5 @@
+/* 2 lazy to use automated testssssss, so i hardcoded most of this shit. */
+
 var apiKeyTMDB     = 'dc4940972c268b026150cf7be6f01d11';
 
 var request = require('request')

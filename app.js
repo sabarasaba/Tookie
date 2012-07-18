@@ -32,7 +32,7 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 
-/* I can't afford to buy a new dyno in heroku, so I run the worker process directly in the current dyno. */
+/* I can't afford to buy a new dynos in heroku to run this worker, so I run it directly in the current app. */
 setInterval(function () {
     worker.fetchData();
 }, tickTime);
