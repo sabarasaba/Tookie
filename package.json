@@ -1,6 +1,6 @@
 {
   "name": "tookie",
-  "version": "0.0.1-10",
+  "version": "0.2.3-2",
   "private": true,
   "scripts": {
     "start": "node app.js"
@@ -10,7 +10,8 @@
     "ejs": "0.7.x",
     "async": "0.1.x",
     "request": "2.9.x",
-    "tmdb": "0.0.x"
+    "tmdb": "0.0.x",
+    "should": "*"
   },
   "engines": {
     "node": "*",

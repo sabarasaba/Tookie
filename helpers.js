@@ -8,9 +8,10 @@ var getIndexOfTracker = function(tracker, array, callback){
 }
 
 var getTorrentWithPriority = function(data, callback){
-
-    getIndexOfTracker("1337x", data, function(index){
-        var req_url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + encodeURI(data[index].url) + "%22%20and%20xpath%3D%22/html/body/div%5B@class%3D%27wrapper%27%5D/div%5B@class%3D%27content%27%5D/div%5B@class%3D%27contentBar%27%5D/div%5B@class%3D%27contentInner%27%5D/div%5B@class%3D%27torrentInfoBox%27%5D/div%5B@class%3D%27torrentInfoBtn%27%5D/a%5B@class%3D%27magnetDw%27%5D%22&format=json";
+    //l337x
+    getIndexOfTracker("torrentreactor", data, function(index){
+        //var req_url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + encodeURI(data[index].url) + "%22%20and%20xpath%3D%22/html/body/div%5B@class%3D%27wrapper%27%5D/div%5B@class%3D%27content%27%5D/div%5B@class%3D%27contentBar%27%5D/div%5B@class%3D%27contentInner%27%5D/div%5B@class%3D%27torrentInfoBox%27%5D/div%5B@class%3D%27torrentInfoBtn%27%5D/a%5B@class%3D%27magnetDw%27%5D%22&format=json";
+        var req_url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%20%3D%20%22" + encodeURI(data[index].url) + "%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40id%3D'body'%5D%2Fdiv%5B%40id%3D'page'%5D%2Fdiv%5B%40id%3D'content'%5D%2Fdiv%5B%40id%3D'container'%5D%2Fdiv%5B%40id%3D'main'%5D%2Fdiv%5B%40class%3D'buttons2'%5D%2Fa%5B%40class%3D'js-download-link'%5D%22&format=json";
         request(req_url, function(error, response, body){
             if (!error && response.statusCode == 200){
                 var data = JSON.parse(body);
