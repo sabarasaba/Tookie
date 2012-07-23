@@ -68,6 +68,11 @@
 	margin-top:25px;
 	position:relative;
 }
+.rg-genre{
+	padding-left: 30px;
+	margin-top:25px;
+	position:relative;	
+}
 .rg-stars{
 	padding-left: 10px;
 }
@@ -192,6 +197,10 @@
 		display: block;		
 	}
 	.rg-format{
+		text-align: center;
+		padding-left: 0px;
+	}
+	.rg-genre{
 		text-align: center;
 		padding-left: 0px;
 	}

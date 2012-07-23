@@ -8,7 +8,7 @@ var cacheLogDir = '/cache/logs.txt';
 var request = require('request')
   , helpers = require('./helpers.js')
   , async   = require('async')
-  , tmdb = require('tmdb').init({apikey: apiKeyTMDB})
+  , tmdb = require('./libs/tmdb').init({apikey: apiKeyTMDB})
   , fs = require('fs');
 
 var torrentz = "http://torrentz.eu";
@@ -18,6 +18,32 @@ var urls = [
     "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ftorrentz.eu%2Fmo%2Fmovies-q1%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40class%3D'results'%5D%2Fdl%22&format=json",
     "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ftorrentz.eu%2Fmo%2Fmovies-q2%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40class%3D'results'%5D%2Fdl%22&format=json"
 ];
+
+var getMetadataFromMovie = function(movie, callback){
+  tmdb.search.movie(movie.title, function(errr,res) {
+    try{
+        if (res != null)
+        {
+              var index = helpers.getIndexOfMovie(res.results, helpers.getYearFromDirtyTitle(movie.dirty_title));
+              if (res.results[index] != undefined && res.results[index] != null)
+              {
+                  tmdb.movie.info(res.results[index].id, function(err,res) {
+                    if (res != null)
+                        callback({ title: res.original_title, genre: res.genres[0].name, score: res.vote_average, poster: "http://cf2.imgobject.com/t/p/w342" + res.poster_path, overview: res.overview, released: res.release_date});
+                    else
+                        callback(null);
+                  });
+              }
+              else
+                callback(null);
+        }
+        else
+        {
+            callback(null);
+        }
+    } catch(err) { }
+  });
+}
 
 exports.fetchData = function(){
 
@@ -49,7 +75,7 @@ exports.fetchData = function(){
                             }
                             catch(err)
                             {
-                                //console.log("error on the first loop: \n" + err);
+                                //console.log("Error scrapping data from torrentz: \n" + err);
                             }
                         }
 
@@ -62,7 +88,7 @@ exports.fetchData = function(){
                 });
             }, function(err){
                 if (err)
-                    console.log("first error on callback: " + err);
+                    console.log('herp derp trying to collect data from torrentz: ' + err);
                 callback(null, array);
             });
         
@@ -72,60 +98,50 @@ exports.fetchData = function(){
         function(array, callback) {
             var array2 = [];
             async.forEach(array, function (movie, callback){ 
-                
-                    tmdb.Movie.search({query: movie.title}, function(err,result) {
-                        var poster = "";
+                getMetadataFromMovie(movie, function(data){
+                    if (data != null)
+                    {
+                        helpers.gimmeTorrent(movie.url, function(torrent){
+                            var element = { url: torrent
+                                          , title: data.title
+                                          , description: data.overview
+                                          , genre: data.genre
+                                          , poster: data.poster
+                                          , rating: data.score
+                                          , release_date: data.released
+                                          , format: helpers.getMovieFormat(movie.dirty_title)
+                                          , id : movie.id};
 
-                        try
-                        {
-                            if (result != null)
-                            {
-                                var index = helpers.getIndexOfMovie(result);
+                            array2.pushIfNotExist(element, function(e){
+                                return e.title.toLowerCase() === element.title.toLowerCase();
+                            });
 
-                                if (result[index].posters.length >= 3)
-                                    poster = result[index].posters[3].image.url;
-                                else
-                                    poster = result[index].posters[result[index].posters.length - 1].image.url;
-
-                                helpers.gimmeTorrent(movie.url, function(torrent_url){
-                                    var element = { url: torrent_url
-                                                  , title: result[index].name
-                                                  , description: result[index].overview
-                                                  , poster: poster
-                                                  , rating: result[index].rating
-                                                  , release_date: result[index].released
-                                                  , format: helpers.getMovieFormat(movie.dirty_title)
-                                                  , id : movie.id};
-
-                                    array2.pushIfNotExist(element, function(e) { 
-                                        return e.title.toLowerCase() === element.title.toLowerCase(); 
-                                    });
-                                    //array2.push(element);
-                                });
-                            }
-                        }
-                        catch(err)
-                        {
-                            //console.log("error on the second loop: \n" + err);
-                            poster = "";
-                        }
-
+                            callback();
+                        });
+                    }
+                    else
+                    {
                         callback();
-                    });
+                    }
+                });
 
             }, function(err) {
                 if (err)
-                    console.log("seccond error on callback: " + err);
+                    console.log("herp derp trying to fetch data from tmdb: " + err);
+
                 callback(null, array2.sort(function(a,b){
                     return (new Date(b.release_date) - new Date(a.release_date));
                 }));
-            }); 
+            });             
         }
     ],
         // the bonus final callback function
         function(err, status) {
             if (err)
-                console.log("error on finish: " + err);
+                console.log("Error wrapping up movies: " + err);
+
+            console.log('Indexed movies: ' + status.length);
+            
             fs.writeFile(__dirname + cacheDirectory, JSON.stringify(status), function(err) {
                 if(err) {
                     console.log(err);

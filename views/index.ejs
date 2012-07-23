@@ -44,6 +44,7 @@
 						<span class="rg-score"></span>
 					</div>
 					<div class="rg-format"></div>
+					<div class="rg-genre"></div>
 					<div class="rg-trailer">Watch Trailer</div>
 					<div class="rg-torrent"></div>
 				</div>
@@ -75,7 +76,7 @@
 							<div class="es-carousel">
 								<ul>
 									<% p.forEach(function(movie){ %>
-										<li><a href="#"><img src="<%= movie.poster %>" data-large="<%= movie.poster %>" alt="" data-torrent="<%= movie.url %>" data-title="<%= movie.title %>" data-rating="<%= movie.rating %>" data-description="<%= movie.description %>" data-format="<%= movie.format %>" width=	 "60" height="90"/></a></li>
+										<li><a href="#"><img src="<%= movie.poster %>" data-large="<%= movie.poster %>" alt="" data-torrent="<%= movie.url %>" data-title="<%= movie.title %>" data-rating="<%= movie.rating %>" data-genre="<%= movie.genre %>" data-description="<%= movie.description %>" data-format="<%= movie.format %>" width=	 "60" height="90"/></a></li>
 									<% }) %>
 								</ul>
 							</div>

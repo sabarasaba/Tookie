@@ -1,40 +1,39 @@
-var request = require('request');
+var request = require('request')
+  , async = require('async');;
 
 var getIndexOfTracker = function(tracker, array, callback){
+    var flag = 0;
+
     for (var i = 0; i < array.length; i++){
         if (array[i].host.indexOf(tracker) != -1)
+        {
+            flag = 1;
             callback(i);
+        }
     }
+
+    if (flag == 0) callback(-1);
 }
 
 var getTorrentWithPriority = function(data, callback){
-    //l337x
+    //l337x magnetURL
+    //var req_url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + encodeURI(data[index].url) + "%22%20and%20xpath%3D%22/html/body/div%5B@class%3D%27wrapper%27%5D/div%5B@class%3D%27content%27%5D/div%5B@class%3D%27contentBar%27%5D/div%5B@class%3D%27contentInner%27%5D/div%5B@class%3D%27torrentInfoBox%27%5D/div%5B@class%3D%27torrentInfoBtn%27%5D/a%5B@class%3D%27magnetDw%27%5D%22&format=json";
     getIndexOfTracker("torrentreactor", data, function(index){
-        //var req_url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + encodeURI(data[index].url) + "%22%20and%20xpath%3D%22/html/body/div%5B@class%3D%27wrapper%27%5D/div%5B@class%3D%27content%27%5D/div%5B@class%3D%27contentBar%27%5D/div%5B@class%3D%27contentInner%27%5D/div%5B@class%3D%27torrentInfoBox%27%5D/div%5B@class%3D%27torrentInfoBtn%27%5D/a%5B@class%3D%27magnetDw%27%5D%22&format=json";
-        var req_url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%20%3D%20%22" + encodeURI(data[index].url) + "%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40id%3D'body'%5D%2Fdiv%5B%40id%3D'page'%5D%2Fdiv%5B%40id%3D'content'%5D%2Fdiv%5B%40id%3D'container'%5D%2Fdiv%5B%40id%3D'main'%5D%2Fdiv%5B%40class%3D'buttons2'%5D%2Fa%5B%40class%3D'js-download-link'%5D%22&format=json";
-        request(req_url, function(error, response, body){
-            if (!error && response.statusCode == 200){
-                var data = JSON.parse(body);
-                callback(data.query.results.a.href);
-            }
-            else
-                callback("empty_url");
-        });
+        if (index > -1)
+        {
+            var req_url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%20%3D%20%22" + encodeURI(data[index].url) + "%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%5B%40id%3D'body'%5D%2Fdiv%5B%40id%3D'page'%5D%2Fdiv%5B%40id%3D'content'%5D%2Fdiv%5B%40id%3D'container'%5D%2Fdiv%5B%40id%3D'main'%5D%2Fdiv%5B%40class%3D'buttons2'%5D%2Fa%5B%40class%3D'js-download-link'%5D%22&format=json";
+            request(req_url, function(error, response, body){
+                if (!error && response.statusCode == 200){
+                    var data = JSON.parse(body);
+                    callback(data.query.results.a.href);
+                }
+                else
+                    callback(null);
+            });
+        }
+        else
+            callback(null);
     });
-
-    /*
-    i = getIndexOfTracker("torrentreactor", data);
-    if (i != -1){
-        return "empty response";
-    }
-
-    i = getIndexOfTracker("mnova", data);
-    if (i != -1){
-        return "empty response";
-    }
-
-    return "empty response";
-    */
 }
 
 exports.gimmeTorrent = function(url, callback){
@@ -45,16 +44,30 @@ exports.gimmeTorrent = function(url, callback){
         if (!error && response.statusCode == 200) {
             var data = JSON.parse(body);
             try{
-                for (var i = 1; i < 20; i++){
-                    var element = { host: data.query.results.div.dl[i].dt.a.span[0].content, url: data.query.results.div.dl[i].dt.a.href};
+                async.forEach([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], function(i, callback){
+                    if (data.query.results.div.dl[i] != undefined && data.query.results.div.dl[i] != null)
+                        var element = { host: data.query.results.div.dl[i].dt.a.span[0].content, url: data.query.results.div.dl[i].dt.a.href};
+                    else
+                        var element = {host: "", url: ""};
+                    
                     array.push(element);
-                }
-            }
-            catch(err){ }
 
-            getTorrentWithPriority(array, function(torrent){
-                callback(torrent);
-            });
+                    callback();
+                }, function(err){
+                    if (!err)
+                    {
+                        getTorrentWithPriority(array, function(torrent){
+                            if (torrent != null)
+                                callback(torrent);
+                            else
+                                callback(url);
+                        });
+                    }
+                    else
+                        console.log("error finishing foreach: " + err);
+                });
+            }
+            catch(err){ console.log("for each error: " + err); }
         }
         else
             console.log("Error on gimmeTorrent: " + error);
@@ -85,33 +98,37 @@ exports.getMovieFormat = function(title){
         title.toLowerCase().indexOf(" scr ")  != -1 ||
         title.toLowerCase().indexOf("tsrip")  != -1 ||
         title.toLowerCase().indexOf("camrip") != -1 ||
+        title.toLowerCase().indexOf("fullcam")!= -1 ||
+        title.indexOf("Scam")                 != -1 ||
         title.indexOf(" CAM ")                != -1)
         return "screener";
 
     if (title.toLowerCase().indexOf("brrip")  != -1 ||
         title.toLowerCase().indexOf("bdrip")  != -1 ||
+        title.toLowerCase().indexOf("bluray") != -1 ||
+        title.toLowerCase().indexOf("1080p")  != -1 ||
+        title.toLowerCase().indexOf("720p")   != -1 ||
         title.toLowerCase().indexOf("bd rip") != -1)
         return "blu-ray rip";
 
     return "dvd rip";
 }
 
-exports.getIndexOfMovie = function(data){
-    var max = 0;
-    var max_index = 0;
-
+exports.getIndexOfMovie = function(data, y){
     for (var i = 0; i < data.length; i++){
-        if (data[i].released != null){
-            var year = data[i].released.substring(0, data[i].released.indexOf('-'));
+        if (data[i].release_date != null){
+            var year = parseInt(data[i].release_date.substring(0, data[i].release_date.indexOf('-')));
 
-            if ((year > max) && (year <= new Date().getFullYear())){
-                max = year;
-                max_index = i;
-            }
+            if (year == y)
+                return i;
         }
     }
 
-    return max_index;
+    return 0;
+}
+
+exports.getYearFromDirtyTitle = function(dirty_title){
+    return dirty_title.substring(dirty_title.indexOf('20', 3), dirty_title.indexOf('20', 3) + 4);
 }
 
 
@@ -130,6 +147,10 @@ exports.sanitizeTitle = function(title){
         }
         else
         {
+            title = title.replace("Pr0nStarS","");
+            title = title.replace("DoNE","");
+            title = title.replace("XXX","");
+            title = title.replace("DiAMOND","");
             title = title.toLowerCase().replace("hdtv","");
             title = title.toLowerCase().replace("x264","");
             title = title.toLowerCase().replace("asap","");
@@ -150,11 +171,13 @@ exports.sanitizeTitle = function(title){
             title = title.toLowerCase().replace("dvdscr","");
             title = title.toLowerCase().replace("1cdrip","");
             title = title.toLowerCase().replace("ddr","");
+            title = title.toLowerCase().replace("h264","");
+            title = title.toLowerCase().replace("phrax","");            
+            title = title.toLowerCase().replace("2005","");
+            title = title.toLowerCase().replace("1080p","");
+            title = title.toLowerCase().replace("720p","");
         }
     }
-
-    if (title.toLowerCase().indexOf("2010") != -1 || title.toLowerCase().indexOf("2009") != -1 || title.toLowerCase().indexOf("2008") != -1)
-        title = "";
 
     return title.toLowerCase().replace(/\s+/g, ' ');
 }
