@@ -8,7 +8,7 @@ var cacheLogDir = '/cache/logs.txt';
 var request = require('request')
   , helpers = require('./helpers.js')
   , async   = require('async')
-  , tmdb = require('./libs/tmdb').init({apikey: apiKeyTMDB})
+  , tmdb = require('./libs/tmdb').init(apiKeyTMDB)
   , fs = require('fs');
 
 var torrentz = "http://torrentz.eu";
@@ -29,7 +29,13 @@ var getMetadataFromMovie = function(movie, callback){
               {
                   tmdb.movie.info(res.results[index].id, function(err,res) {
                     if (res != null)
-                        callback({ title: res.original_title, genre: res.genres[0].name, score: res.vote_average, poster: "http://cf2.imgobject.com/t/p/w342" + res.poster_path, overview: res.overview, released: res.release_date});
+                    {
+                        var genre = "undefined";
+                        if (res.genres[0] != null)
+                            genre = res.genres[0].name;
+
+                        callback({ title: res.original_title, genre: genre, score: res.vote_average, poster: "http://cf2.imgobject.com/t/p/w342" + res.poster_path, overview: res.overview, released: res.release_date});
+                    }
                     else
                         callback(null);
                   });

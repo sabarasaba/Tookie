@@ -18,6 +18,12 @@
 	max-height:100%;
 	max-width:100%;
 }
+@-moz-document url-prefix() { 
+  .rg-image img{
+	max-height:100%;
+	max-width:100%;
+  }
+}
 .rg-image-nav a{
 	position:absolute;
 	top:0px;
