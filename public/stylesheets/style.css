@@ -71,13 +71,28 @@
 }
 .rg-format{
 	padding-left: 30px;
-	margin-top:25px;
+	margin-top:10px;
 	position:relative;
 }
 .rg-genre{
 	padding-left: 30px;
-	margin-top:25px;
+	margin-top:10px;
+	position:relative;
+}
+.rg-released{
+	padding-left: 30px;
+	margin-top:10px;
 	position:relative;	
+}
+.rg-cast{
+	padding-left: 30px;
+	margin-top:10px;
+	position:relative;
+}
+.rg-cast p{
+	display: inline-block;
+	font-family: arial;
+	font-size: 17px;
 }
 .rg-stars{
 	padding-left: 10px;
@@ -186,14 +201,6 @@
 		text-align: center;
 		margin-left: 0px;
 	}
-	.rg-trailer{
-		text-align: center;
-		padding-left: 0px;
-	}
-	.rg-torrent{
-		text-align: center;
-		padding-left: 0px;
-	}
 	.rg-trailer a{
 		font-size: 25px;
 	}
@@ -202,11 +209,27 @@
 		padding-left: 0px;
 		display: block;		
 	}
-	.rg-format{
+	.rg-released{
+		text-align: center;
+		padding-left: 0px;
+	}
+	.rg-cast{
 		text-align: center;
 		padding-left: 0px;
 	}
 	.rg-genre{
+		text-align: center;
+		padding-left: 0px;
+	}
+	.rg-format{
+		text-align: center;
+		padding-left: 0px;
+	}
+	.rg-torrent{
+		text-align: center;
+		padding-left: 0px;
+	}
+	.rg-trailer{
 		text-align: center;
 		padding-left: 0px;
 	}

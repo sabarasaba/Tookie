@@ -217,8 +217,10 @@ $(function() {
 					rating      = $thumb.data('rating'),
 					description = $thumb.data('description'),
 					torrent     = $thumb.data('torrent'),
-					genre     = $thumb.data('genre'),
+					genre       = $thumb.data('genre'),
 					format      = $thumb.data('format');
+					released    = $thumb.data('released');
+					cast        = $thumb.data('cast');
 				
 				$('<img/>').load( function() {
 					
@@ -227,6 +229,8 @@ $(function() {
 					$rgGallery.find('div.rg-image').empty().append('<img src="' + largesrc + '" />');
 					$rgGallery.find('div.rg-format').empty().append('<span>Format: '+ format +'</span>');
 					$rgGallery.find('div.rg-genre').empty().append('<span>Genre: '+ genre +'</span>');
+					$rgGallery.find('div.rg-released').empty().append('<span>Released: '+ released +'</span>');
+					$rgGallery.find('div.rg-cast').empty().append('<span>Cast:&nbsp;&nbsp;<p>'+ cast +'</p></span>');
 
 					if (rating > 0){
 						$rgGallery.find('span.rg-score').empty().append('<code>'+rating+'/10</code>');

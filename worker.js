@@ -27,14 +27,39 @@ var getMetadataFromMovie = function(movie, callback){
               var index = helpers.getIndexOfMovie(res.results, helpers.getYearFromDirtyTitle(movie.dirty_title));
               if (res.results[index] != undefined && res.results[index] != null)
               {
-                  tmdb.movie.info(res.results[index].id, function(err,res) {
-                    if (res != null)
-                    {
-                        var genre = "undefined";
-                        if (res.genres[0] != null)
-                            genre = res.genres[0].name;
+                  var movieID = res.results[index].id;
 
-                        callback({ title: res.original_title, genre: genre, score: res.vote_average, poster: "http://cf2.imgobject.com/t/p/w342" + res.poster_path, overview: res.overview, released: res.release_date});
+                  tmdb.movie.info(movieID, function(err,res) {
+                    if (res != null) {
+
+                        tmdb.movie.casts(movieID, function(err, movieCast){
+                            if (movieCast != null){
+
+                                // Get the genre of the movie.
+                                var genre = "undefined";
+                                if (res.genres[0] != null)
+                                    genre = res.genres[0].name;
+
+                                // Get the first five actors of the movie.
+                                var cast = "";
+                                for(var i = 0; i < 5; i++){
+                                  if (movieCast.cast[i] != undefined && movieCast.cast[i] != null)
+                                    cast += movieCast.cast[i].name + ", ";
+                                }
+
+                                callback({ 
+                                    title: res.original_title,
+                                    genre: genre,
+                                    score: res.vote_average,
+                                    poster: "http://cf2.imgobject.com/t/p/w342" + res.poster_path,
+                                    overview: res.overview,
+                                    released: res.release_date,
+                                    cast: cast.substr(0, cast.length - 2)
+                                });
+                            }
+                            else
+                                callback(null);
+                        });
                     }
                     else
                         callback(null);
@@ -116,7 +141,8 @@ exports.fetchData = function(){
                                           , rating: data.score
                                           , release_date: data.released
                                           , format: helpers.getMovieFormat(movie.dirty_title)
-                                          , id : movie.id};
+                                          , id: movie.id
+                                          , cast: data.cast };
 
                             array2.pushIfNotExist(element, function(e){
                                 return e.title.toLowerCase() === element.title.toLowerCase();
