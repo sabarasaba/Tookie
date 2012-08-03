@@ -101,9 +101,74 @@ $(function() {
 				// top right buttons: hide / show carousel
 				
 				var $viewfull	= $('<a href="#" class="rg-view-full"></a>'),
-					$viewthumbs	= $('<a href="#" class="rg-view-thumbs rg-view-selected"></a>');
+					$viewthumbs	= $('<a href="#" class="rg-view-thumbs rg-view-selected"></a>'),
+					$all        = $('<i class="rg-view-filter" id="rg-view-all" original-title="All movies"></i>'),
+					$good       = $('<i class="rg-view-filter" id="rg-view-good" original-title="Blu-ray and dvd"></i>'),
+					$br         = $('<i class="rg-view-filter" id="rg-view-br" original-title="Blu-ray"></i>'),
+					$dvd        = $('<i class="rg-view-filter" id="rg-view-dvd" original-title="Dvd"></i>'),
+					$screener   = $('<i class="rg-view-filter" id="rg-view-screener" original-title="Screener"></i>');
 				
-				$rgGallery.prepend( $('<div class="rg-view"/>').append( $viewfull ).append( $viewthumbs ) );
+				$rgGallery.prepend( $('<div class="rg-view"/>').append( $viewfull ).append( $viewthumbs ).append( $all ).append($good).append($br).append($dvd).append($screener));
+
+				var $filterAll  = $('#rg-view-all'),
+					$filterGood = $('#rg-view-good'),
+					$filterBR   = $('#rg-view-br'),
+					$filterDVD  = $('#rg-view-dvd'),
+					$filterScr  = $('#rg-view-screener');
+
+				$filterAll.tipsy({gravity: 's'});
+				$filterGood.tipsy({gravity: 's'});
+				$filterBR.tipsy({gravity: 's'});
+				$filterDVD.tipsy({gravity: 's'});
+				$filterScr.tipsy({gravity: 's'});
+
+				//.rg-selected-view
+				var url = window.location.href;
+
+				// Home
+				if (url.substr(url.length-1, url.length) == '/')
+					$('#rg-view-all').addClass('rg-selected-view');
+
+				// Good
+				if (url.substr(url.lastIndexOf('/') + 1, url.length) == 'good')
+					$filterGood.addClass('rg-selected-view');
+
+				// Blu-ray 
+				if (url.substr(url.lastIndexOf('/') + 1, url.length) == 'br')
+					$filterBR.addClass('rg-selected-view');
+
+				// Dvd
+				if (url.substr(url.lastIndexOf('/') + 1, url.length) == 'dvd')
+					$filterDVD.addClass('rg-selected-view');
+				// Screener
+				if (url.substr(url.lastIndexOf('/') + 1, url.length) == 'screener')
+					$filterScr.addClass('rg-selected-view');
+
+
+				$all.on('click.rgGallery', function( event ){
+					if (!$filterAll.hasClass('rg-selected-view'))
+						$(location).attr('href', '/');
+				});
+
+				$good.on('click.rgGallery', function( event ){
+					if (!$filterGood.hasClass('rg-selected-view'))
+						$(location).attr('href', '/good');
+				});
+
+				$br.on('click.rgGallery', function( event ){
+					if (!$filterBR.hasClass('rg-selected-view'))
+						$(location).attr('href', '/br');
+				});
+
+				$dvd.on('click.rgGallery', function( event ){
+					if (!$filterDVD.hasClass('rg-selected-view'))
+						$(location).attr('href', '/dvd');
+				});
+
+				$screener.on('click.rgGallery', function( event ){
+					if (!$filterScr.hasClass('rg-selected-view'))
+						$(location).attr('href', '/screener');
+				});
 				
 				$viewfull.on('click.rgGallery', function( event ) {
 						if( mode === 'carousel' )

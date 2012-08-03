@@ -29,7 +29,20 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+// Index page, shows all movies.
 app.get('/', routes.index);
+
+// Display only dvd-rips and blurays.
+app.get('/good', routes.good);
+
+// Display only dvd-rip movies.
+app.get('/dvd', routes.dvd);
+
+// Display only blu-ray movies.
+app.get('/br', routes.br);
+
+// Display only screener movies.
+app.get('/screener', routes.screener);
 
 /* I can't afford to buy a new dynos in heroku to run this worker, so I run it directly in the current app. */
 setInterval(function () {

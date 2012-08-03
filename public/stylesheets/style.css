@@ -138,9 +138,40 @@
 }
 .rg-view{
 	height:30px;
+	clear: both;
+	display: block;
+	position: relative;
+}
+.rg-view-filter{
+	float:left;
+	width:16px;
+	height:16px;
+	margin-left:3px;
+	border:3px solid #464646;
+	opacity:0.8;
+	cursor: pointer;
+}
+.rg-selected-view{
+	background-color:#6f6f6f;
+	border-color:#6f6f6f;
+	cursor: default;
+}
+#rg-view-all{
+	background:#464646 url(../images/view-all.png) no-repeat top left;
+}
+#rg-view-good{
+	background:#464646 url(../images/view-good.png) no-repeat top left;
+}
+#rg-view-br{
+	background:#464646 url(../images/view-br.png) no-repeat top left;
+}
+#rg-view-dvd{
+	background:#464646 url(../images/view-dvd.png) no-repeat top left;
+}
+#rg-view-screener{
+	background:#464646 url(../images/view-screener.png) no-repeat top left;
 }
 .rg-view a{
-	display:block;
 	float:right;
 	width:16px;
 	height:16px;
