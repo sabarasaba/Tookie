@@ -43,4 +43,4 @@ exports.testGetTorrentLink = function(test){
   });
 };
 
-//worker.fetchData();
+worker.fetchData();

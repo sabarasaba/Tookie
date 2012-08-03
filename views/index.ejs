@@ -8,7 +8,8 @@
         <meta name="description" content="Tookie, the best way to browse and download the latest movies." />
         <meta name="keywords" content="tookie, torrentz, torrents, movies, movie, download movies, sabarasaba, ignacio, rivas" />
 		<meta name="author" content="Ignacio Rivas" />
-		<meta property="og:image" content="images/tookie.png"/>
+		<meta property="og:image" content="http://dl.com.dropbox/u/8474936/tookie.png"/>
+		<link rel="image_src" type="image/jpeg" href="http://dl.dropbox.com/u/8474936/tookie.png"/>
 		<link rel="shortcut icon" href="../favicon.ico"> 
         <link rel="stylesheet" type="text/css" href="stylesheets/demo.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
@@ -79,12 +80,13 @@
 							<div class="es-carousel">
 								<ul>
 									<% p.forEach(function(movie){ %>
-										<li><a href="#"><img src="<%= movie.poster %>" data-large="<%= movie.poster %>" alt="" data-torrent="<%= movie.url %>" data-title="<%= movie.title %>" data-rating="<%= movie.rating %>" data-genre="<%= movie.genre %>" data-description="<%= movie.description %>" data-format="<%= movie.format %>" data-released="<%= movie.release_date %>" data-cast="<%= movie.cast %>" width="60" height="90"/></a></li>
+										<li><a href="#"><img src="<%= movie.poster_small %>" data-large="<%= movie.poster %>" alt="" data-torrent="<%= movie.url %>" data-title="<%= movie.title %>" data-rating="<%= movie.rating %>" data-genre="<%= movie.genre %>" data-description="<%= movie.description %>" data-format="<%= movie.format %>" data-released="<%= movie.release_date %>" data-cast="<%= movie.cast %>" width="60" height="90"/></a></li>
 									<% }) %>
 								</ul>
 							</div>
 						</div>
 					</div><!-- rg-thumbs -->
+					<div class="loading"></div>
 				</div><!-- rg-gallery -->
 				<p class="sub">created by <a href="http://sabarasaba.github.com/" target="_blank">@sabarasaba</a></p>
 			</div><!-- content -->

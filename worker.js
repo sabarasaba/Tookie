@@ -36,7 +36,7 @@ var getMetadataFromMovie = function(movie, callback){
                             if (movieCast != null){
 
                                 // Get the genre of the movie.
-                                var genre = "undefined";
+                                var genre = "not available";
                                 if (res.genres[0] != null)
                                     genre = res.genres[0].name;
 
@@ -47,11 +47,20 @@ var getMetadataFromMovie = function(movie, callback){
                                     cast += movieCast.cast[i].name + ", ";
                                 }
 
+                                // If theres no poster available
+                                var poster = "http://cf2.imgobject.com/t/p/w342" + res.poster_path;
+                                var poster_small = "http://cf2.imgobject.com/t/p/w92" + res.poster_path;
+
+                                if (res.poster_path == null){
+                                    poster = poster_small = 'images/undefined.jpg';
+                                }
+
                                 callback({ 
                                     title: res.original_title,
                                     genre: genre,
                                     score: res.vote_average,
-                                    poster: "http://cf2.imgobject.com/t/p/w342" + res.poster_path,
+                                    poster: poster,
+                                    poster_small: poster_small,
                                     overview: res.overview,
                                     released: res.release_date,
                                     cast: cast.substr(0, cast.length - 2)
@@ -138,6 +147,7 @@ exports.fetchData = function(){
                                           , description: data.overview
                                           , genre: data.genre
                                           , poster: data.poster
+                                          , poster_small: data.poster_small
                                           , rating: data.score
                                           , release_date: data.released
                                           , format: helpers.getMovieFormat(movie.dirty_title)

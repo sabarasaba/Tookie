@@ -206,6 +206,7 @@ $(function() {
 				
 				// shows the large image that is associated to the $item
 				
+				$('.loading').hide();
 				var $loader	= $rgGallery.find('div.rg-loading').show();
 				
 				$items.removeClass('selected');

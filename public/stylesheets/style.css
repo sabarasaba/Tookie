@@ -162,6 +162,20 @@
 .rg-view a.rg-view-thumbs{
 	background-position:0px -16px;
 }
+.loading{
+	width:46px;
+	height:46px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	background:#000 url(../images/ajax-loader.gif) no-repeat center center;
+	margin:-23px 0px 0px -23px;
+	z-index:200;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	opacity:0.7;
+}
 .rg-loading{
 	width:46px;
 	height:46px;
@@ -170,7 +184,7 @@
 	left:50%;
 	background:#000 url(../images/ajax-loader.gif) no-repeat center center;
 	margin:-23px 0px 0px -23px;
-	z-index:100;
+	z-index:200;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
