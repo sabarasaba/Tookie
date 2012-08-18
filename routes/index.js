@@ -1,78 +1,32 @@
 
-/*
- * GET home page.
- */
 
-var fs = require('fs')
-  , worker = require('../worker.js');
+var request = require('request')
+  , mongoose    = require('mongoose')
+  , MovieSchema = require('../models/movie');
 
+mongoose.connect('mongodb://localhost:27017/tookie');
 
-var filterMovies = function(m, quality, callback){
-	var movies = [];
+var MovieModel = mongoose.model('Movie', MovieSchema.Movie);
 
-	for (var i = 0; i < m.length; i++){
-		if ((quality == null && m[i].format != 'screener') || (m[i].format == quality))
-			movies.push(m[i]);
-	}
-
-	callback(movies);
-};
 
 exports.index = function(req, res){
-	fs.readFile(worker.cacheDirectory, 'utf8', function (err,data) {
-		if (err) {
-			return console.log(err);
-		}
-
-		res.render('index', { p: JSON.parse(data) });
-	});
+	return MovieModel.find({ }).sort('-release_date').execFind(function (err, movie){
+    	if (!err)
+      		res.render('index', { m:  movie, u: req.user, title: ''});
+    	else
+      		return console.log(err);
+  	});
 };
 
-exports.good = function(req, res){
-	fs.readFile(worker.cacheDirectory, 'utf8', function (err,data) {
-		if (err) {
-			return console.log(err);
-		}
-
-		filterMovies(JSON.parse(data), null, function(movies){
-			res.render('index', { p:  movies});
-		});
-	});
+exports.getMovie = function(req, res){
+	MovieModel.findById(req.params.id, function (err, doc) {
+    	if (!err)
+      		res.render('movie', { mf: doc, u: req.user, title: doc.title + ' / '});
+    	else
+      		console.log(err);
+  	});
 };
 
-exports.dvd = function(req, res){
-	fs.readFile(worker.cacheDirectory, 'utf8', function (err,data) {
-		if (err) {
-			return console.log(err);
-		}
-
-		filterMovies(JSON.parse(data), 'dvd rip', function(movies){
-			res.render('index', { p:  movies});
-		});
-	});
-};
-
-exports.br = function(req, res){
-	fs.readFile(worker.cacheDirectory, 'utf8', function (err,data) {
-		if (err) {
-			return console.log(err);
-		}
-
-		filterMovies(JSON.parse(data), 'blu-ray rip', function(movies){
-			res.render('index', { p:  movies});
-		});
-	});
-};
-
-exports.screener = function(req, res){
-	fs.readFile(worker.cacheDirectory, 'utf8', function (err,data) {
-		if (err) {
-			return console.log(err);
-		}
-
-		filterMovies(JSON.parse(data), 'screener', function(movies){
-			res.render('index', { p:  movies});
-		});
-	});
-};
-
+exports.about = function(req, res){
+  res.render('about', { u: req.user, title: 'About' + ' / '});
+}

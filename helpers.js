@@ -25,7 +25,10 @@ var getTorrentWithPriority = function(data, callback){
             request(req_url, function(error, response, body){
                 if (!error && response.statusCode == 200){
                     var data = JSON.parse(body);
-                    callback(data.query.results.a.href);
+                    if (data.query.results != null)
+                        callback(data.query.results.a.href);
+                    else
+                        callback(null);
                 }
                 else
                     callback(null);
@@ -99,6 +102,7 @@ exports.getMovieFormat = function(title){
         title.toLowerCase().indexOf("tsrip")  != -1 ||
         title.toLowerCase().indexOf("camrip") != -1 ||
         title.toLowerCase().indexOf("fullcam")!= -1 ||
+        title.toLowerCase().indexOf("hdcam")!= -1 ||
         title.indexOf("Scam")                 != -1 ||
         title.indexOf(" CAM ")                != -1)
         return "screener";

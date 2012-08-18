@@ -1,15 +1,18 @@
+
+
 var apiKeyTMDB     = 'dc4940972c268b026150cf7be6f01d11';
-exports.cacheDirectory = './cache/data';
-exports.cacheLogDir = './cache/logs.txt';
 
-var cacheDirectory = '/cache/data';
-var cacheLogDir = '/cache/logs.txt';
+var request     = require('request')
+  , helpers     = require('./helpers')
+  , async       = require('async')
+  , tmdb        = require('./libs/tmdb').init(apiKeyTMDB)
+  , mongoose    = require('mongoose')
+  , MovieSchema = require('./models/movie');
 
-var request = require('request')
-  , helpers = require('./helpers.js')
-  , async   = require('async')
-  , tmdb = require('./libs/tmdb').init(apiKeyTMDB)
-  , fs = require('fs');
+
+mongoose.connect('mongodb://localhost:27017/tookie');
+
+var MovieModel = mongoose.model('Movie', MovieSchema.Movie);
 
 var torrentz = "http://torrentz.eu";
 
@@ -142,23 +145,55 @@ exports.fetchData = function(){
                     if (data != null)
                     {
                         helpers.gimmeTorrent(movie.url, function(torrent){
-                            var element = { url: torrent
+                            var movieObj = new MovieModel({ url: torrent
                                           , title: data.title
                                           , description: data.overview
                                           , genre: data.genre
                                           , poster: data.poster
                                           , poster_small: data.poster_small
+                                          , poster_medium : data.poster.replace('w342', 'w185')
                                           , rating: data.score
                                           , release_date: data.released
                                           , format: helpers.getMovieFormat(movie.dirty_title)
                                           , id: movie.id
-                                          , cast: data.cast };
-
-                            array2.pushIfNotExist(element, function(e){
-                                return e.title.toLowerCase() === element.title.toLowerCase();
+                                          , cast: data.cast
+                                          , default_url: movie.url 
                             });
 
-                            callback();
+                            MovieModel.findOne({title: movieObj.title}, function(err, obj){
+                                if (!err && !obj){
+                                    movieObj.save(function (err) {
+                                      if (!err)
+                                        return console.log(movieObj.title + " saved!");
+                                      else
+                                        return console.log(err);
+
+                                      callback();
+                                    });
+                                }
+                                else{
+                                    if ((obj.format != movieObj.format) && (movieObj != 'screener')){
+                                        MovieModel.update({ _id: obj._id }, {$set: {
+                                            description : movieObj.description,
+                                            rating : movieObj.rating,
+                                            format : movieObj.format,
+                                            url : movieObj.url,
+                                            default_url : movieObj.default_url 
+                                        }}, function(error, res){
+                                            if (error)
+                                                console.log('error updating: ' + error);
+                                            else
+                                                console.log('movie updated: ' + movieObj.title);
+
+                                            callback();
+                                        });
+                                    }
+                                    else{
+                                        callback();
+                                    }
+                                    
+                                }
+                            });
                         });
                     }
                     else
@@ -182,22 +217,7 @@ exports.fetchData = function(){
             if (err)
                 console.log("Error wrapping up movies: " + err);
 
-            console.log('Indexed movies: ' + status.length);
-            
-            fs.writeFile(__dirname + cacheDirectory, JSON.stringify(status), function(err) {
-                if(err) {
-                    console.log(err);
-                } else 
-                {
-                    fs.open(__dirname + cacheLogDir, 'a', 666, function( e, id ) {
-                        fs.write( id, 'created new cache file at: ' + new Date() + '\n', null, 'utf8', function(){
-                            fs.close(id, function(){
-                                console.log("Cache file updated !");
-                            });
-                        });
-                    });
-                }
-            }); 
+            console.log("Fetching process done !!!!11one");
         }
     );
 }

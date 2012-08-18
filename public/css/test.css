@@ -1,0 +1,42 @@
+#filters { position:relative; height:29px; padding:7px; }
+#filters .form { margin-right:5px; float:left; margin-top: 3px; }
+
+#filters p{
+	float: left;
+	margin: 9px 8px 0 10px;
+	color: white;
+}
+
+
+.fmulticheck { font-size:16px; padding:0; margin:0; list-style:none; width:150px; }
+
+.fmulticheck .tagline { border:1px solid #0D0D0D; float:left; width:32%; }
+
+.fmulticheck .item { background:#1F1F1F url(../img/gradient-dark.gif) top repeat-x; border:1px solid #0D0D0D; float:left; width:32%; }
+
+.fmulticheck .first { border-right:none; border-radius:5px 0 0 5px; -moz-border-radius:5px 0 0 5px; -webkit-border-radius:5px 0 0 5px; }
+.fmulticheck .last { border-left:none; border-radius:0 5px 5px 0; -moz-border-radius:0 5px 5px 0; -webkit-border-radius:0 5px 5px 0; }
+
+.fmulticheck .item .item-a { display:block; color:#838383; height:27px; line-height:27px; text-align:center; text-decoration:none; }
+.fmulticheck li.item.selected{ background:#848484 url(../img/gradient-light.gif) top repeat-x; }
+.fmulticheck li.item.selected .item-a, { color:#161616; }
+
+ul.fmulticheck.purity { width:231px; }
+ul.fmulticheck.purity li.item.selected.first { background:#016E12 url(../img/gradient-purity-sfw.gif) top repeat-x; }
+ul.fmulticheck.purity li.item.selected .item-a { color:#fff; }
+ul.fmulticheck.purity li.item.selected { background:#837200 url(../img/gradient-purity-sketchy.gif) top repeat-x; }
+ul.fmulticheck.purity li.item.selected.last { background:#7B0000 url(../img/gradient-purity-nsfw.gif) top repeat-x; }
+
+.favs { 
+	border-radius: 5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	background: white;
+	font-size:10px;
+	color: black;
+	left:38%; bottom:-20px;
+	padding:3px;
+	position:absolute;
+	text-align:center;
+	z-index: 100;
+}

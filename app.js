@@ -1,53 +1,116 @@
-/**
- * Module dependencies.
- */
+
 
 var express = require('express')
   , routes = require('./routes')
+  , apiRoutes = require('./routes/api')
   , http = require('http')
-  , worker = require('./worker.js');
+  , passport = require('passport')
+  , util = require('util')
+  , eng = require('ejs-locals')
+  , FacebookStrategy = require('passport-facebook').Strategy;
 
-var tickTime = 10800000; //3 hours
+
+/* FB login shit */
+var FACEBOOK_APP_ID = "399936936740982"
+var FACEBOOK_APP_SECRET = "43ce8afd0b292bad703f70349d896835";
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      return done(null, profile);
+    });
+  }
+));
+
 
 var app = express();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
+  app.engine('ejs', eng);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
-  app.set('view options', { layout: false });
   app.use(express.favicon());
+  app.use(express.cookieParser());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+
+  /* FB login shit */
+  app.use(express.session({ secret: 'tubiega en tanga' }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-  app.use("/cache", express.static(__dirname + '/cache'));
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-// Index page, shows all movies.
+
+// Index
 app.get('/', routes.index);
 
-// Display only dvd-rips and blurays.
-app.get('/good', routes.good);
+// Get one movie
+app.get('/m/:id', routes.getMovie);
 
-// Display only dvd-rip movies.
-app.get('/dvd', routes.dvd);
+// Get about page
+app.get('/about', routes.about);
 
-// Display only blu-ray movies.
-app.get('/br', routes.br);
+// API: Index
+app.get('/api/', apiRoutes.index);
 
-// Display only screener movies.
-app.get('/screener', routes.screener);
+// API: Get all movies
+app.get('/api/getAllMovies', apiRoutes.getAllMovies);
 
-/* I can't afford to buy a new dynos in heroku to run this worker, so I run it directly in the current app. */
-setInterval(function () {
-    worker.fetchData();
-}, tickTime);
+// API: Get good movies
+app.get('/api/getGoodMovies', apiRoutes.getAllMovies);
+
+// API: Get bad movies
+app.get('/api/getBadMovies', apiRoutes.getAllMovies);
+
+
+
+app.get('/u/settings', ensureAuthenticated, function(req, res){
+  res.render('settings', { u: req.user, title: 'Settings' + ' / ' });
+});
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook', {display: [ 'popup' ], scope: [ 'email', 'user_videos' ] }),
+  function(req, res){
+});
+
+app.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+app.get('/u/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/')
+}
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

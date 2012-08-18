@@ -1,0 +1,25 @@
+prettySociable v1.2.1
+© Copyright, Stephane Caron
+http://www.no-margin-for-errors.com
+
+
+============================= Released under =============================
+http://creativecommons.org/licenses/by/2.5/
+
+
+============================ More information ============================
+http://www.no-margin-for-errors.com/projects/prettySociable/
+
+
+============================== Description ===============================
+
+prettySociable is a jQuery plugin that tries to make sharing fun while
+being easy to use. It was inspired by the sharing on mashable.com.
+
+While ShareThis and AddThis provides a very useful piece code that allow
+users to share basically anything everywhere, their solution is not the
+prettiest nor the easiest to use. prettySociable simply asks the user to
+drag the items he wants to share onto the website he wants to send it to.
+
+Please refer to http://www.no-margin-for-errors.com/projects/prettySociable/
+for all the details on how to use. 
