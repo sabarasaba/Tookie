@@ -244,7 +244,7 @@ section article a div p{
 	float: left;
 }
 #userbar .l { font-size:13px; padding:10px; }
-#userbar .r { position:relative; background:url(img/gradient-submenu.gif) 20px repeat-x; z-index:995; }
+#userbar .r { position:relative; z-index:995; }
 .float-btns { position:absolute; left:0; top:0; }
 #faq_btn { border-bottom:1px solid #373737; display:block; position:relative; font-size:15px; padding:2px 2px 0px 2px; margin:7px 0 0 15px; color: #4CBFFF; }
 #faq_btn:hover { color:#fff; }
@@ -266,7 +266,7 @@ section article a div p{
 #userbar .r .notif-sub .row { border-bottom:1px solid #131313; }
 #userbar .r .notif-sub .row:last-child { border:none; }
 #userbar .r .notif-sub .row .head { padding:10px; }
-#userbar .r .notif-sub .row .head .count { background:#1E1E1E url(_images/gradient-submenu-active.gif) top repeat-x; color:#E88A1D; padding:3px 7px; }
+#userbar .r .notif-sub .row .head .count { background:#1E1E1E; color:#E88A1D; padding:3px 7px; }
 #userbar .r .notif-sub .row .cont { padding:0 10px 5px 10px; }
 #userbar .r .notif-sub .row .repl > a { display:block; }
 
@@ -281,7 +281,7 @@ section article a div p{
 .search-main .tabs .blank { font-size:12px;margin-left:15px; padding:10px 20px 0 0; color: #C6C6C6; }
 .search-main .tabs .item { float:left; }
 .search-main .tabs .item .item-a { color:#717171; display:block; padding:7px 13px; font-size:16px; }
-.search-main .tabs .active { background:#171717 url(_images/mainmenu-start.gif) -15px -10px; border:1px solid #272727; border-bottom:none; }
+.search-main .tabs .active { background:#171717; border:1px solid #272727; border-bottom:none; }
 .search-main .tabs .item .item-a:hover { color:#fff; }
 .search-main .tabs .active .item-a { color:#4CBFFF; }
 
@@ -380,7 +380,7 @@ a#searchicon.active { background-position:-51px 0px; }
 
 
 .table { background:#1A1A1A; border:1px solid #282828; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; display:inline-block; *display:inline; vertical-align:top; zoom:1; }
-.header { background:#0F0F0F url(img/gradient-filters.gif) top repeat-x; border-bottom:1px solid #282828; color:#4CBFFF; padding:10px 12px; text-align:left; }
+.header { background:#0F0F0F; border-bottom:1px solid #282828; color:#4CBFFF; padding:10px 12px; text-align:left; }
 
 .subscr-wrap{
 	font-size: 17px;
