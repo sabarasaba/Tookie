@@ -441,6 +441,17 @@ a#searchicon.active { background-position:-51px 0px; }
 	margin-bottom: 50px;
 }
 
+.pageSpace{
+	margin: 50px auto;
+	width: 90%;
+	background: #111;
+	font: 1.1em Calibri, "Lucida Grande", "Lucida Sans Unicode", verdana;
+	color: white;
+	border: 1px solid #232323;
+	text-align: center;
+	padding: 5px 0 5px 0;
+}
+
 
 /* FORMS ACCOUNT*/
 

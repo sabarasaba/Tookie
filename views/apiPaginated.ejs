@@ -1,0 +1,17 @@
+<% m.forEach(function(movie){ %>
+	<article>
+		<div class="qualityContainer">
+			<% if (movie.format == 'screener') {%>
+				<span class="diag red"><%= movie.format %></span>
+			<% } %>
+		</div>
+		<a href="/m/<%= movie._id %>">
+			<img src="<%= movie.poster_small %>" style="width:185px;height:279px"/>
+			<div>
+				<span><%= movie.release_date %></span>
+				<p>Score: <%= movie.rating %></p>
+				<p>Genre: <%= movie.genre %></p>
+			</div>
+		</a>
+	</article>
+<% }); %>

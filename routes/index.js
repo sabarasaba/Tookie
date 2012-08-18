@@ -10,7 +10,7 @@ var MovieModel = mongoose.model('Movie', MovieSchema.Movie);
 
 
 exports.index = function(req, res){
-	return MovieModel.find({ }).sort('-release_date').execFind(function (err, movie){
+	return MovieModel.find({ }).sort('-release_date').limit(30).execFind(function (err, movie){
     	if (!err)
       		res.render('index', { m:  movie, u: req.user, title: ''});
     	else

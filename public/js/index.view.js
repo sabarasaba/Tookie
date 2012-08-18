@@ -1,34 +1,29 @@
-/*
-
-<div id="postswrapper">
-   <div class="item">content</div>
-   ...
-   <div id="loadmoreajaxloader" style="display:none;"><center><img src="ajax-loader.gif" /></center></div>
-</div>
+var page = 1;
 
 $(window).scroll(function()
 {
-    if($(window).scrollTop() == $(document).height() - $(window).height())
+    if($(window).scrollTop() >= ($(document).height() - $(window).height()) - 10)
     {
-        $('div#loadmoreajaxloader').show();
+        $('div#loader').show();
         $.ajax({
-	        url: "loadmore.php",
+	        url: "/api/getPaginated/" + page * 30 + "/30",
 	        success: function(html)
 	        {
 	            if(html)
 	            {
-	                $("#postswrapper").append(html);
-	                $('div#loadmoreajaxloader').hide();
+	            	page++;
+
+	            	$("#contentHolder").append("<div class='pageSpace'> Page " + page + "</div>");
+	                $("#contentHolder").append(html);
+	                $('div#loader').hide();
 	            }else
 	            {
-	                $('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
+	                $('div#loader').html("<div class='pageSpace'>No more movies to show.</div>");
 	            }
 	        }
         });
     }
 });
-
-*/
 
 $(document).ready(function() {
 

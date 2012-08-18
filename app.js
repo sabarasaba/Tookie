@@ -74,6 +74,9 @@ app.get('/about', routes.about);
 // API: Index
 app.get('/api/', apiRoutes.index);
 
+// API: Get bad movies
+app.get('/api/getPaginated/:from/:to', apiRoutes.getPaginated);
+
 // API: Get all movies
 app.get('/api/getAllMovies', apiRoutes.getAllMovies);
 
