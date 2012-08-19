@@ -36,3 +36,12 @@ exports.find = function(req, res){
     res.render('find', { u: req.user, m: results, title: req.params.keywords +  ' / ', keywords: req.params.keywords});
   });
 };
+
+exports.settings = function(req, res){
+  res.render('settings', { u: req.user, title: 'Settings' + ' / ' });
+};
+
+exports.logout = function(req, res){
+  req.logout();
+  res.redirect('/');
+};

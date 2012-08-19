@@ -10,7 +10,7 @@ var express = require('express')
   , FacebookStrategy = require('passport-facebook').Strategy;
 
 
-/* FB login shit */
+/* FB login stuff */
 var FACEBOOK_APP_ID = "399936936740982"
 var FACEBOOK_APP_SECRET = "43ce8afd0b292bad703f70349d896835";
 
@@ -48,7 +48,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
 
-  /* FB login shit */
+  /* FB login stuff */
   app.use(express.session({ secret: 'tubiega en tanga' }));
   app.use(passport.initialize());
   app.use(passport.session());
@@ -61,10 +61,13 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+
+// Display the current enviroment variables.
 console.log("mongourl      : " + process.env.MONGOHQ_URL);
 console.log("tmdb api      : " + process.env.tookie_tmdb_apikey);
 console.log("fb-api id     : " + process.env.tookie_fb_api_id);
 console.log("fb-api secret : " + process.env.tookie_fb_api_secret);
+
 
 // Index
 app.get('/', routes.index);
@@ -77,6 +80,12 @@ app.get('/about', routes.about);
 
 // Get find page
 app.get('/find/:keywords', routes.find);
+
+// Settings page
+app.get('/u/settings', ensureAuthenticated, routes.settings);
+
+// Logout user
+app.get('/u/logout', routes.logout);
 
 // API: Index
 app.get('/api/', apiRoutes.index);
@@ -97,28 +106,21 @@ app.get('/api/getBadMovies', apiRoutes.getAllMovies);
 app.get('/api/findMoviesPaginated/:keywords/:from/:to', apiRoutes.findMoviesPaginated);
 
 
-
-app.get('/u/settings', ensureAuthenticated, function(req, res){
-  res.render('settings', { u: req.user, title: 'Settings' + ' / ' });
-});
-
+// Facebook connect: Auth window.
 app.get('/auth/facebook',
   passport.authenticate('facebook', {display: [ 'popup' ], scope: [ 'email', 'user_videos' ] }),
   function(req, res){
 });
 
+// Facebook connect: Callback function for the API.
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/');
   });
 
-app.get('/u/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
 
-
+// Facebook connect: Verifies if the user is currently logged in.
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/')
@@ -126,5 +128,5 @@ function ensureAuthenticated(req, res, next) {
 
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+  console.log("Tookie server listening on port " + app.get('port'));
 });
