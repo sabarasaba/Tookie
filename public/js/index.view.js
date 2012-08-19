@@ -5,23 +5,30 @@ $(window).scroll(function()
     if($(window).scrollTop() >= ($(document).height() - $(window).height()) - 10)
     {
         $('div#loader').show();
-        $.ajax({
-	        url: "/api/getPaginated/" + page * 30 + "/30",
-	        success: function(html)
-	        {
-	            if(html)
-	            {
-	            	page++;
+        var ajaxUrl = "";
+        if ($('#findKeywords').val() != undefined){
+	        ajaxUrl = "/api/findMoviesPaginated/" + $('#findKeywords').val() + "/" + page * 30 + "/30";
+    	}else{
+    		ajaxUrl = "/api/getPaginated/" + page * 30 + "/30";
+    	}
 
-	            	$("#contentHolder").append("<div class='pageSpace'> Page " + page + "</div>");
-	                $("#contentHolder").append(html);
-	                $('div#loader').hide();
-	            }else
-	            {
-	                $('div#loader').html("<div class='pageSpace'>No more movies to show.</div>");
-	            }
-	        }
-        });
+    	$.ajax({
+		        url: ajaxUrl,
+		        success: function(html)
+		        {
+		            if(html)
+		            {
+		            	page++;
+
+		            	$("#contentHolder").append("<div class='pageSpace'> Page " + page + "</div>");
+		                $("#contentHolder").append(html);
+		                $('div#loader').hide();
+		            }else
+		            {
+		                $('div#loader').html("<div class='pageSpace'>No more movies to show.</div>");
+		            }
+		        }
+	        });
     }
 });
 

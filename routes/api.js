@@ -33,7 +33,7 @@ exports.getBadMovies = function(req,res){
 
 };
 
-exports.findMovies = function(req, res){
+exports.findMoviesPaginated = function(req, res){
 	MovieModel.find({title: new RegExp('^'+ req.params.keywords + '$',"i")}).sort('-release_date').limit(req.params.to).skip(req.params.from).execFind(function(err, results){
 		res.render('apiPaginated', { m:  results });
 	});

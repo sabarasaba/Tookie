@@ -75,6 +75,7 @@ app.get('/m/:id', routes.getMovie);
 // Get about page
 app.get('/about', routes.about);
 
+// Get find page
 app.get('/find/:keywords', routes.find);
 
 // API: Index
@@ -92,7 +93,8 @@ app.get('/api/getGoodMovies', apiRoutes.getAllMovies);
 // API: Get bad movies
 app.get('/api/getBadMovies', apiRoutes.getAllMovies);
 
-app.get('/api/findMovies/:movie', apiRoutes.findMovies);
+// API: Find movies paginated
+app.get('/api/findMoviesPaginated/:keywords/:from/:to', apiRoutes.findMoviesPaginated);
 
 
 
