@@ -35,9 +35,19 @@ $(document).ready(function() {
 	var $gtab = $('#genretab');
 	var $ttab = $('#titletab');
 
+	var redirectToFind = function(keywords){
+		$(location).attr('href', 'http://localhost:3000/find/' + keywords);
+	};
+	
+
+	$(".searchBox").keypress(function(e) {
+	    if(e.which == 13) {
+	        redirectToFind(toTitleCase($(".searchBox").val()));
+	    }
+	});
 
 	$("#searchicon").click(function(event) {
-        $(location).attr('href', 'http://localhost:3000/find/' + toTitleCase($(".searchBox").val()));
+        redirectToFind(toTitleCase($(".searchBox").val()));
     });
 
 	var showTab = function(tab){
