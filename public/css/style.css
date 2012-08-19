@@ -280,7 +280,7 @@ section article a div p{
 .search-main .tabs { list-style:none; margin:0; bottom:-1px; padding:0; position:relative; z-index:2 }
 .search-main .tabs .blank { font-size:12px;margin-left:15px; padding:10px 20px 0 0; color: #C6C6C6; }
 .search-main .tabs .item { float:left; }
-.search-main .tabs .item .item-a { color:#717171; display:block; padding:7px 13px; font-size:16px; }
+.search-main .tabs .item .item-a { color:#717171; display:block; padding:7px 13px; font-size:16px; font-family: Helvetica, Georgia, serif; }
 .search-main .tabs .active { background:#171717; border:1px solid #272727; border-bottom:none; }
 .search-main .tabs .item .item-a:hover { color:#fff; }
 .search-main .tabs .active .item-a { color:#4CBFFF; }
