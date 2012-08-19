@@ -12,6 +12,21 @@ Live Site
 
 Tookie is currently deployed to nodejitsu. You can check the live site at http://tookie.jit.su/
 
+Configuration
+--------------
+
+1. Download/clone the repo
+2. Run "npm install"
+3. Start the mongodb server
+4. Create the following enviroment variables:
+	* MONGOHQ_URL : Containing the mongodb connectionstring
+	* tookie_tmdb_apikey : Containing your tmdb api key
+	* tookie_fb_api_id : Containing your facebook api id
+	* tookie_fb_api_secret : Containing your facebook api secret key
+5. Run "node tests/test.js" in order to make the first data scrapping process.
+6. Run "node app.js"
+7. Go to "http://localhost:3000/"
+
 Author
 -------
 
