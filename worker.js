@@ -1,6 +1,6 @@
 
 
-var apiKeyTMDB     = 'dc4940972c268b026150cf7be6f01d11';
+var apiKeyTMDB     = process.env.tookie_tmdb_apikey;
 
 var request     = require('request')
   , helpers     = require('./helpers')

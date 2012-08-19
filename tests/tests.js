@@ -1,6 +1,6 @@
 /* In order to run the test you should first do npm install -g nodeunit and then run "nodeunit tests.js" */
 
-var apiKeyTMDB     = 'dc4940972c268b026150cf7be6f01d11';
+var apiKeyTMDB     = process.env.tookie_tmdb_apikey;
 
 var helpers  = require('../helpers.js')
   , worker   = require('../worker.js')

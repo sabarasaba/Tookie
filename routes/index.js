@@ -32,7 +32,7 @@ exports.about = function(req, res){
 }
 
 exports.find = function(req, res){
-  return MovieModel.find({title: new RegExp("^"+req.params.keywords)}).sort('-release_date').limit(30).execFind(function(err, results){
+  return MovieModel.find({title: new RegExp(req.params.keywords, 'i')}).sort('-release_date').limit(30).execFind(function(err, results){
     res.render('find', { u: req.user, m: results, title: req.params.keywords +  ' / ', keywords: req.params.keywords});
   });
 };

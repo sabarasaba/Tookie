@@ -11,8 +11,8 @@ var express = require('express')
 
 
 /* FB login stuff */
-var FACEBOOK_APP_ID = "399936936740982"
-var FACEBOOK_APP_SECRET = "43ce8afd0b292bad703f70349d896835";
+var FACEBOOK_APP_ID = tookie_fb_api_id
+var FACEBOOK_APP_SECRET = tookie_fb_api_secret;
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -25,7 +25,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: "/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -130,3 +130,7 @@ function ensureAuthenticated(req, res, next) {
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Tookie server listening on port " + app.get('port'));
 });
+
+
+// El boton find no funciona en la vista de peliculas, tengo que modularizar el paginate the index.view.js
+// poner un alert en la vista de settings de que no esta implementado.

@@ -56,6 +56,7 @@ $(document).ready(function() {
 	$("#searchicon").click(function(event) {
         redirectToFind(toTitleCase($(".searchBox").val()));
     });
+    /*
 
 	var showTab = function(tab){
 		$('.quality').removeClass('active');
@@ -100,4 +101,5 @@ $(document).ready(function() {
     		showTab('title');
     	}
     });
+*/
 });
