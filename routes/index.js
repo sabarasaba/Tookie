@@ -4,7 +4,7 @@ var request = require('request')
   , mongoose    = require('mongoose')
   , MovieSchema = require('../models/movie');
 
-mongoose.connect('mongodb://localhost:27017/tookie');
+mongoose.connect(process.env.MONGOHQ_URL);
 
 var MovieModel = mongoose.model('Movie', MovieSchema.Movie);
 
@@ -30,3 +30,9 @@ exports.getMovie = function(req, res){
 exports.about = function(req, res){
   res.render('about', { u: req.user, title: 'About' + ' / '});
 }
+
+exports.find = function(req, res){
+  return MovieModel.find({title: new RegExp("^"+req.params.keywords)}).sort('-release_date').limit(30).execFind(function(err, results){
+    res.render('find', { u: req.user, m: results, title: req.params.keywords +  ' / '});
+  });
+};

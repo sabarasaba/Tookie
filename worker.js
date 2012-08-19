@@ -10,7 +10,7 @@ var request     = require('request')
   , MovieSchema = require('./models/movie');
 
 
-mongoose.connect('mongodb://localhost:27017/tookie');
+mongoose.connect(process.env.MONGOHQ_URL);
 
 var MovieModel = mongoose.model('Movie', MovieSchema.Movie);
 

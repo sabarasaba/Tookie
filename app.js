@@ -61,6 +61,10 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+console.log("mongourl      : " + process.env.MONGOHQ_URL);
+console.log("tmdb api      : " + process.env.tookie_tmdb_apikey);
+console.log("fb-api id     : " + process.env.tookie_fb_api_id);
+console.log("fb-api secret : " + process.env.tookie_fb_api_secret);
 
 // Index
 app.get('/', routes.index);
@@ -70,6 +74,8 @@ app.get('/m/:id', routes.getMovie);
 
 // Get about page
 app.get('/about', routes.about);
+
+app.get('/find/:keywords', routes.find);
 
 // API: Index
 app.get('/api/', apiRoutes.index);
@@ -85,6 +91,8 @@ app.get('/api/getGoodMovies', apiRoutes.getAllMovies);
 
 // API: Get bad movies
 app.get('/api/getBadMovies', apiRoutes.getAllMovies);
+
+app.get('/api/findMovies/:movie', apiRoutes.findMovies);
 
 
 
