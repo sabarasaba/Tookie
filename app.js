@@ -119,6 +119,8 @@ app.get('/search', routes.search);
 
 app.get('/search/release-date', routes.search);
 
+app.get('/search/added-date', routes.search);
+
 app.get('/search/top', routes.search);
 
 app.get('/movie/:id', routes.getMovie);
@@ -133,6 +135,8 @@ app.get('/movie/feedback/:id/:type/:description', api.saveFeedback);
 app.get('/api/movie-to-favs/:userid/:movieid', api.movieToFavs);
 
 app.get('/api/movies-by-releasedate/:page', api.moviesByReleaseDate);
+
+app.get('/api/movies-by-addeddate/:page', api.moviesByAddedDate);
 
 app.get('/api/movies-by-rating/:page', api.moviesByRating);
 

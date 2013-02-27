@@ -21,6 +21,17 @@ exports.moviesByReleaseDate = function(req, res){
   });
 };
 
+exports.moviesByAddedDate = function(req, res){
+  var pageTo = req.params.page * 30;
+
+  MovieModel.find({ }).sort('-modified').limit(moviesPerPage).skip(pageTo).execFind(function(err, results){
+    if (!err)
+      res.render('apiMoviesPaginated', { m:  results, user: req.user });
+    else
+      console.log('Error: ' + err)
+  });
+};
+
 exports.moviesByRating = function(req, res){
   var pageTo = req.params.page * 30;
 

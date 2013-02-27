@@ -71,8 +71,9 @@ var loadData = function(){
       getDataFromAPI('/api/movies-by-rating/' + currentPage++);
     break;
 
-    case 'search':
-      console.log('search uri');
+    case 'added-date':
+      console.log('added-date');
+      getDataFromAPI('/api/movies-by-addeddate/' + currentPage++);
     break;
 
     default:
