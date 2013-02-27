@@ -643,6 +643,43 @@ input:focus
   height: 275px;
 }
 
+.movies-container .movie-box .movie-admin-tools{
+  display: none;
+}
+
+.movie-box:hover .movie-admin-tools{
+  display: inline;
+}
+
+.movie-admin-delete{
+  position: absolute;
+  bottom: 5px;
+  display: block;
+  font-size: 25px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  line-height: 35px;
+  width: 35px;
+  height: 35px;
+  background: white;
+}
+
+.movie-admin-edit{
+  position: absolute;
+  bottom: 5px;
+  right: 0;
+  display: block;
+  font-size: 25px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  line-height: 35px;
+  width: 35px;
+  height: 35px;
+  background: white;
+}
+
 .movies-container .movie-separator{
   position: relative;
   width: 80%;

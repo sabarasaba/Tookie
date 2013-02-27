@@ -15,7 +15,7 @@ exports.moviesByReleaseDate = function(req, res){
 
   MovieModel.find({ }).sort('-release_date').limit(moviesPerPage).skip(pageTo).execFind(function(err, results){
     if (!err)
-      res.render('apiMoviesPaginated', { m:  results });
+      res.render('apiMoviesPaginated', { m:  results, user: req.user });
     else
       console.log('Error: ' + err)
   });
@@ -145,6 +145,32 @@ exports.updateFeedback = function(req, res){
     else{
       console.log(err);
       console.log('Error: ' + err);
+    }
+  });
+};
+
+exports.updateMovie = function(req, res){
+  MovieModel.update({ '_id': req.params.id }, { $set: { 'url': req.body.url, 'title': req.body.title, 'description': req.body.description, 'genre': req.body.genre, 'poster': req.body.poster, 'posterSmall': req.body.posterSmall, 'posterMedium': req.body.posterMedium, 'rating': req.body.rating, 'releaseDate': req.body.releaseDate, 'format': req.body.format, 'cast': req.body.cast } }, function(err){
+    if (!err){
+      console.log('Movie "' + req.body.title + '" updated and feedback erased.');
+      res.send('Movie updated');
+    }
+    else{
+      console.log('Error: ' + err_delete);
+      res.send('Error: ' + err_delete);
+    }
+  });
+};
+
+exports.deleteMovie = function(req, res){
+  MovieModel.remove({ '_id': req.params.id }, function(err){
+    if (!err){
+      console.log('movie deleted');
+      res.send('Movie deleted..');
+    }
+    else{
+      console.log('Err: ' + err);
+      res.send('Error trying to delete the movie..');
     }
   });
 };

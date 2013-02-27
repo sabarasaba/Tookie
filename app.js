@@ -110,6 +110,8 @@ app.get('/admin/user/edit/:name', requireRole('admin'), routes.adminEditUser);
 
 app.get('/admin/feedback/solve/:id', requireRole('admin'), routes.adminSolveFeedback);
 
+app.get('/admin/movie/edit/:id', requireRole('admin'), routes.adminEditMovie);
+
 
 // Movies Routes
 
@@ -143,6 +145,10 @@ app.get('/api/admin/makeAdmin/:name/:state', requireRole('admin'), api.makeAdmin
 app.get('/api/admin/deleteUser/:name', requireRole('admin'), api.deleteUser);
 
 app.post('/api/admin/updateFeedback/:id', requireRole('admin'), api.updateFeedback);
+
+app.post('/api/admin/updateMovie/:id', requireRole('admin'), api.updateMovie);
+
+app.get('/api/admin/deleteMovie/:id', requireRole('admin'), api.deleteMovie);
 
 app.get('/api/admin/deleteFeedback/:id', requireRole('admin'), api.deleteFeedback);
 

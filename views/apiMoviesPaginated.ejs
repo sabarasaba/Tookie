@@ -1,5 +1,5 @@
 <% m.forEach(function(movie){ %>
-  <div class="movie-box target1">
+  <div class="movie-box">
     <a href="/movie/<%= movie._id %>" target="_blank">
       <img src="<%= movie.poster_medium %>" />
     </a>
@@ -15,5 +15,15 @@
       <div class="quality quality-bad" title="<%= movie.format %> quality."></div>
     <% }} %>
 
+    <% if ((user !== undefined) && (user.role === 'admin')){ %>
+      <div class="movie-admin-tools">
+        <div class="movie-admin-edit">
+          <a href="/admin/movie/edit/<%= movie._id %>" data-fancybox-type="iframe" id="button-edit-movie" class="icon-edit"></a>
+        </div>
+        <div class="movie-admin-delete">
+          <a href="#delete" data-movieID="<%= movie._id %>" id="button-delete-movie" class="icon-minus-sign"></a>
+        </div>
+      </div>
+    <% } %>
   </div>
 <% }); %>

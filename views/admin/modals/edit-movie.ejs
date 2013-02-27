@@ -4,61 +4,61 @@
 <div class="edit-form">
   <h2>Edit Movie</h2>
   <input type="hidden" id="buttonState" value="cancel" />
-  <input type="hidden" id="movie-id" value="<%= f[0]._movie[0]._id %>" />
+  <input type="hidden" id="movie-id" value="<%= m._id %>" />
 
   <div class="edit-form-field">
     <p>URL</p>
-    <input id="movie-url" data-name="<%= f[0]._movie[0].url %>" value="<%= f[0]._movie[0].url %>" />
+    <input id="movie-url" data-name="<%= m.url %>" value="<%= m.url %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Title</p>
-    <input id="movie-title" value="<%= f[0]._movie[0].title %>" />
+    <input id="movie-title" value="<%= m.title %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Description</p>
-    <input id="movie-description" value="<%= f[0]._movie[0].description %>" />
+    <input id="movie-description" value="<%= m.description %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Genre</p>
-    <input id="movie-genre" value="<%= f[0]._movie[0].genre %>" />
+    <input id="movie-genre" value="<%= m.genre %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Poster</p>
-    <input id="movie-poster" value="<%= f[0]._movie[0].poster %>" />
+    <input id="movie-poster" value="<%= m.poster %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Poster small</p>
-    <input id="movie-posterSmall" value="<%= f[0]._movie[0].poster_small %>" />
+    <input id="movie-posterSmall" value="<%= m.poster_small %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Poster medium</p>
-    <input id="movie-posterMedium" value="<%= f[0]._movie[0].poster_medium %>" />
+    <input id="movie-posterMedium" value="<%= m.poster_medium %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Rating</p>
-    <input id="movie-rating" value="<%= f[0]._movie[0].rating %>" />
+    <input id="movie-rating" value="<%= m.rating %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Release date</p>
-    <input id="movie-releaseDate" value="<%= f[0]._movie[0].release_date %>" />
+    <input id="movie-releaseDate" value="<%= m.release_date %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Format</p>
-    <input id="movie-format" value="<%= f[0]._movie[0].format %>" />
+    <input id="movie-format" value="<%= m.format %>" />
   </div>
 
   <div class="edit-form-field">
     <p>Cast</p>
-    <input id="movie-cast" value="<%= f[0]._movie[0].cast %>" />
+    <input id="movie-cast" value="<%= m.cast %>" />
   </div>
 
   <div class="edit-form-submit">

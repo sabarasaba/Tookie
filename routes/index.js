@@ -161,11 +161,23 @@ exports.adminEditUser = function(req, res){
 exports.adminSolveFeedback = function(req, res){
   FeedbackModel.find({ '_id': req.params.id }).populate('_movie').sort('-modified').exec(function(err, results){
     if (!err){
-      res.render('admin/modals/edit-movie', { title: 'Edit Feedback -', user: req.user, f:  results });
+      res.render('admin/modals/edit-movie', { title: 'Edit Feedback -', user: req.user, m:  results[0]._movie[0] });
     }
     else{
       console.log('Error: ' + err);
       res.send('There was a problem getting the feedback.');
+    }
+  });
+};
+
+exports.adminEditMovie = function(req, res){
+  MovieModel.findOne({ '_id': req.params.id }).exec(function(err, results){
+    if (!err){
+      res.render('admin/modals/edit-movie', { title: 'Edit Movie -', user: req.user, m:  results });
+    }
+    else{
+      console.log('Error: ' + err);
+      res.send('There was a problem getting the movie.');
     }
   });
 };
