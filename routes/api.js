@@ -26,7 +26,7 @@ exports.moviesByRating = function(req, res){
 
   MovieModel.find({ }).sort('-rating').limit(moviesPerPage).skip(pageTo).execFind(function(err, results){
     if (!err)
-      res.render('apiMoviesPaginated', { m:  results });
+      res.render('apiMoviesPaginated', { m:  results, user: req.user });
     else
       console.log('Error: ' + err)
   });
