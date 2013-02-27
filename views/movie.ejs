@@ -1,0 +1,78 @@
+<% layout('layout') -%>
+<% script('/js/movie-ui.js') -%>
+<% script('/js/libs/fancybox/jquery.fancybox.js') -%>
+<% script('/js/libs/fancybox/helpers/jquery.fancybox-buttons.js') -%>
+<% script('/js/libs/fancybox/helpers/jquery.fancybox-media.js') -%>
+<% stylesheet('/js/libs/fancybox/jquery.fancybox.css') -%>
+<% stylesheet('/js/libs/fancybox/helpers/jquery.fancybox-buttons.css') -%>
+
+<div class="text-message"></div>
+<div class="movie-container">
+  <div class="movie-flags">
+    <div class="flag-bookmark">
+      <% if (user){ %>
+      <!-- and movie is faved -->
+        <a href="#fav" id="fav-movie" class="icon-star"></a>
+      <% }else{ %>
+        <a href="#fav" id="fav-movie" class="icon-star"></a>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="movie-links lefty">
+    <a id="poster-image" href="<%= movie.poster %>"><img src="<%= movie.poster %>" alt="<%= movie.title %>" /></a>
+
+    <div class="movie-buttons">
+      <a href="/movie/feedback/<%= movie._id %>" data-fancybox-type="iframe" class="movie-feedback">feedback</a>
+      <div class="trailer"><a href="#trailer">Watch Trailer</a></div>
+      <a href="<%= movie.url %>">Download Movie</a>
+
+      <div class="sharer">
+        <a href="#facebook" onClick="share('facebook');" class="icon-facebook"></a>
+        <a href="#twitter" onClick="share('twitter', '<%= movie.title %>');" class="icon-twitter"></a>
+        <a href="#gplus" onClick="share('gplus');" class="icon-google-plus"></a>
+        <a href="#pinterest" onClick="share('pinterest', '<%= movie.title %>', '<%= movie.poster %>');" class="icon-pinterest"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="movie-info lefty">
+    <h1 class="movie-title"><%= movie.title %></h1>
+
+    <p><span class="bold">Description</span>: <%= movie.description %></p>
+
+    <p><span class="bold">Year</span>: <%= new Date(movie.release_date).getFullYear() %></p>
+    <p><span class="bold">Format</span>: <%= movie.format %></p>
+    <p><span class="bold">Duration</span>: 158 min</p>
+    <p><span class="bold">Gender</span>:
+      <%
+        var genres = movie.genre.split(',');
+        for (var x = 0; x < genres.length -1; x++){
+      %>
+        <a href="/search/genre/<%= genres[x] %>"><%= genres[x] %></a> -
+      <%
+        }
+      %>
+      <a href="/search/genre/<%= genres[x] %>"><%= genres[genres.length - 1] %></a>
+    </p>
+    <p><span class="bold">Score</span>: <%= movie.rating %>/10</p>
+    <p><span class="bold">Director</span>: <a href="#">Tom Hooper</a></p>
+    <p><span class="bold">Stars</span>:
+      <%
+        var cast = movie.cast.split(',');
+        for (var x = 0; x < cast.length -1; x++){
+      %>
+        <a href="/search/stars/<%= cast[x] %>"><%= cast[x] %></a> -
+      <%
+        }
+      %>
+      <a href="/search/stars/<%= cast[x] %>"><%= cast[cast.length - 1] %></a>
+    </p>
+    <input type="hidden" id="movieID" value="<%= movie._id %>" />
+    <% if (user){ %>
+      <input type="hidden" id="userID" value="<%= user._id %>" />
+    <% }else{ %>
+      <input type="hidden" id="userID" value="null" />
+    <% } %>
+  </div>
+</div>

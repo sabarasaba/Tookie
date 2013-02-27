@@ -1,0 +1,52 @@
+<% layout('../layout') -%>
+<% script('/js/admin-ui.js') -%>
+<% script('/js/libs/fancybox/jquery.fancybox.js') -%>
+<% script('/js/libs/fancybox/helpers/jquery.fancybox-buttons.js') -%>
+<% script('/js/libs/fancybox/helpers/jquery.fancybox-media.js') -%>
+<% stylesheet('/js/libs/fancybox/jquery.fancybox.css') -%>
+<% stylesheet('/js/libs/fancybox/helpers/jquery.fancybox-buttons.css') -%>
+
+<div class="admin-menu">
+  <div class="admin-tabs lefty">
+    <ul>
+      <li><a href="/admin/dashboard">Dashboard</a></li>
+      <li><a href="/admin/feedbacks">Feedbacks</a></li>
+      <li class="selected"><a href="#">Users</a></li>
+    </ul>
+  </div>
+
+  <div class="admin-content lefty">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Is admin?</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% var index = 0; u.forEach(function(user){ %>
+          <tr>
+            <td><%= index %></td>
+            <td> <a href="/user/<%= user.name %>" target="_blank"><%= user.name %></a></td>
+            <td><%= user.email %></td>
+            <% if (user.role == 'admin'){  %>
+              <td>Yes</td>
+            <% }else{ %>
+              <td>No</td>
+            <% } %>
+            <td class="admin-action-icons">
+              <a href="/admin/user/edit/<%= user.name %>" data-fancybox-type="iframe" id="admin-user-edit" class="icon-edit"></a>
+              <a href="#makeAdmin" id="admin-user-makeAdmin" class="icon-user"></a>
+              <a href="#delete" id="admin-user-delete" class="icon-minus-sign"></a>
+            </td>
+          </tr>
+        <% index++; }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="clear"></div>
+</div>

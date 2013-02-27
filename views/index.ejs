@@ -1,0 +1,43 @@
+<% layout('layout') -%>
+<% script('/js/main-ui.js') -%>
+
+<div class="search-box">
+  <div class="search-bar">
+    <input type="text" id="searchField" class="default-input" />
+    <button class="button-icon icon-magnifying-glass" id="search-button"></button>
+    <button class="button-icon icon-equalizer" id="filters-button"></button>
+  </div>
+
+  <div class="search-filters">
+    <div class="conector"></div>
+      <div class="filter-container">
+        <div class="filter-inputs right-separator lefty">
+          <input type="text" placeholder="random value" />
+          <input type="text" placeholder="random value" />
+          <input type="text" placeholder="random value" />
+        </div>
+
+        <div class="filter-inputs righty">
+          <input type="text" placeholder="random value" />
+          <input type="text" placeholder="random value" />
+          <input type="text" placeholder="random value" />
+
+        </div>
+
+        <div class="clear"></div>
+      </div>
+  </div>
+
+  <div class="ads-main">
+
+  </div>
+
+  <div class="search-default">
+    <div class="title">Or view by:</div>
+    <div class="option"> <a href="/search/release-date">Release Date</a> </div>
+    <span class="divider"></span>
+    <div class="option"> <a href="/search/top">Rating</a> </div>
+    <span class="divider"></span>
+    <div class="option"> <a href="/search/random">Random</a> </div>
+  </div>
+</div>
