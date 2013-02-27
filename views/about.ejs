@@ -1,0 +1,36 @@
+<% layout('layout') -%>
+
+<div class="text-box">
+  <h1>About Tookie</h1>
+    <p>Tookie is a meta-search engine that indexes movie torrents from <a href="http://torrentz.eu" target="_blank">torrentz</a> and presents all the information in a beautiful and responsive UI. It allows the user to view the information of the latest movies available out there along with the respective metadata (trailer, cast, release date, etc). And it also provides an external link to a .torrent file or a magnet link for downloading the movie.</p>
+    <p>And in case you're wondering, yes. Tookie is open-source and the code is hosted in <a href="https://github.com/sabarasaba/tookie" target="_blank">github</a>. Feel free to fork me =)</p>
+
+    <div class="notice">
+      <ul>
+        <li>Tookie does not host any files or torrents in any way, shape or form.</li>
+        <li>Tookie links to other independent search engines that might host torrent files. I have absolutely no control over those domains.</li>
+        <li>Torrent files are simply metadata and cannot be copyrighted.</li>
+      </ul>
+    </div>
+
+    <p>If you wanna know what are the latest features added to tookie, you can read the <a href="/changelog">changelogs</a></p>
+
+  <h1 class="margin-title">About the developer</h1>
+    <p>
+      The person behind all of this, is <a href="http://sabarasaba.github.com/" target="_blank">Ignacio Rivas</a>. He's a software developer who lives in the beautiful and boring city of <a href="http://en.wikipedia.org/wiki/Tandil" target="_blank">Tandil, Argentina</a>.
+      He currently works as a front-end engineer at <a href="http://www.globant.com/" target="_blank">Globant</a>, and in his spare time he enjoys
+      hacking code, listening to music and playing table tennis.
+    </p>
+    <p>If you have a problem, question or suggestion, you can contact me at:</p>
+
+    <div class="notice">
+      <ul class="block-list">
+        <li class="icon-envelope"> <a href="mailto:rivasign@gmail.com">rivasign[at]gmail.com</a></li>
+        <li class="icon-twitter"><a href="http://twitter.com/sabarasaba">@sabarasaba</a></li>
+        <li class="icon-linkedin"><a href="http://www.linkedin.com/in/rivasignacio">RivasIgnacio</a></li>
+      </ul>
+    </div>
+
+  <h1 class="margin-title">Technologies involved</h1>
+    <p>Tookie runs a worker every 3 hours who indexes all the new movies available in the first pages of torrentz. And then, for each movie found it querys the API v3 of TMDB and gets all the metadata and saves everything on a mongo database. </p>
+</div>

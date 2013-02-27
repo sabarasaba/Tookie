@@ -1,0 +1,29 @@
+URI nodejitsu:
+
+  mongodb://nodejitsu:c272ce175477650348179351aafac9b6@alex.mongohq.com:10000/nodejitsudb273863201894
+
+export from nodejitsu:
+
+  mongoexport --host alex.mongohq.com --port 10000 -d nodejitsudb273863201894 -u nodejitsu -p c272ce175477650348179351aafac9b6 --collection movies --out tookie-movies-export.json
+
+connect cli nodejitsu:
+
+  mongo alex.mongohq.com:10000/tookie -u nodejitsu -p c272ce175477650348179351aafac9b6
+
+  mongo alex.mongohq.com:10000/nodejitsudb273863201894 -u nodejitsu -p c272ce175477650348179351aafac9b6
+
+
+  Appfog:
+  Original:
+    mongodb://appfog:5d7a375aa07afa50803eeca7f178b7f0@linus.mongohq.com:10057/tookie_rivasign
+
+    mongodb://ignacio:r4d10h34d@linus.mongohq.com:10057/tookie_rivasign
+    mongodb://rivasign@gmail.com:geek4life@linus.mongohq.com:10057/tookie_rivasign
+
+mongo linus.mongohq.com:10057/tookie_rivasign -u ignacio -p 919e38c446d8760e7a517b5fb05bd9f8
+
+
+> db.feedbacks.remove();
+> db.feedbacks.find({});
+
+db.users.update({'name': 'ignacio'}, { $set: {'role': 'admin'}});

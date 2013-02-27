@@ -1,0 +1,5 @@
+<div class="feedback-box">
+  <% f.forEach(function(feedback){ %>
+    <a href="#"><%= feedback._movie[0].title %>: <%= feedback.description %></a>
+  <% }); %>
+</div>
