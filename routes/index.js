@@ -6,7 +6,7 @@ var mongoose       = require('mongoose')
   , FavsSchema     = require('../models/favs')
   , FeedbackSchema = require('../models/feedback');
 
-mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://ignacio:r4d10h34d@linus.mongohq.com:10057/tookie_rivasign');
+mongoose.connect(process.env.MONGOHQ_URL);
 
 var MovieModel    = mongoose.model('movie', MovieSchema.Movie);
 var UserModel     = mongoose.model('User', userModel.userSchema);
