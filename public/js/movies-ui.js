@@ -99,25 +99,6 @@ $(document).ready(function(){
     loadData();
   });
 
-
-  $('.target1').live({
-    contextMenu: function('context-menu-1'){
-
-    }
-  });
-  $('.target1').contextMenu('context-menu-1', {
-    'Context Menu Item 1': {
-        click: function(element) {  // element is the jquery obj clicked on when context menu launched
-            alert('Menu item 1 clicked');
-        },
-        klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
-    },
-    'Context Menu Item 2': {
-        click: function(element){ alert('second clicked'); },
-        klass: "second-menu-item"
-    }
-  });
-
 });
 
 
