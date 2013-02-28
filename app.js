@@ -134,6 +134,8 @@ app.get('/movie/feedback/:id/:type/:description', api.saveFeedback);
 
 app.get('/api/movie-to-favs/:userid/:movieid', api.movieToFavs);
 
+app.post('/api/search-movie/:page', api.moviesSearch);
+
 app.get('/api/movies-by-releasedate/:page', api.moviesByReleaseDate);
 
 app.get('/api/movies-by-addeddate/:page', api.moviesByAddedDate);

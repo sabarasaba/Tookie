@@ -22,6 +22,10 @@ var parseCurrentURI = function (){
   return pathArray;
 };
 
+var getURLParameter = function(name){
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+};
+
 var getDataFromAPI = function(uri){
   var ajaxURI = uri;
   var startTime = new Date().getTime();
@@ -78,6 +82,48 @@ var loadData = function(){
 
     default:
       console.log('default uri');
+
+      var paramsObject = {
+        q:       getURLParameter('q'),
+        filter1: getURLParameter('filter1'),
+        filter2: getURLParameter('filter2'),
+        filter3: getURLParameter('filter3'),
+        filter4: getURLParameter('filter4'),
+        filter5: getURLParameter('filter5'),
+        filter6: getURLParameter('filter6'),
+      };
+
+      var startTime = new Date().getTime();
+      $.ajax({
+        type: 'POST',
+        data: { parameters: JSON.stringify(paramsObject)},
+        url: '/api/search-movie/' + currentPage++,
+        dataType: 'html',
+        success: function(html){
+          if (html){
+            var requestTime = new Date().getTime() - startTime;
+            var timeInMinutes = parseFloat(requestTime / 1000).toString().substr(0, 5);
+
+            if (currentPage != 1){
+              $('.movies-container').append('<div class="movie-separator"><p>Page '+ currentPage +'</p><div class="load-time">Loaded in ' + timeInMinutes + '</div></div>');
+            }
+
+            $('.movies-container').append(html);
+          }
+          else{
+            console.log('Error on ajax call to api.');
+            console.log(html);
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+          console.log('Error');
+          console.log(errorThrown);
+        },
+        complete: function(jqXHR, textStatus){
+          callInProgress = false;
+          $('.loading').hide();
+        }
+      });
     break;
   };
 };

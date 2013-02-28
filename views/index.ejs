@@ -2,31 +2,33 @@
 <% script('/js/main-ui.js') -%>
 
 <div class="search-box">
-  <div class="search-bar">
-    <input type="text" id="searchField" class="default-input" />
-    <button class="button-icon icon-magnifying-glass" id="search-button"></button>
-    <button class="button-icon icon-equalizer" id="filters-button"></button>
-  </div>
 
-  <div class="search-filters">
-    <div class="conector"></div>
-      <div class="filter-container">
-        <div class="filter-inputs right-separator lefty">
-          <input type="text" placeholder="random value" />
-          <input type="text" placeholder="random value" />
-          <input type="text" placeholder="random value" />
+  <form action="/search" method="get">
+    <div class="search-bar">
+      <input type="text" id="searchField" name="q" class="default-input" />
+      <button class="button-icon icon-magnifying-glass" id="search-button" type="submit"></button>
+      <button class="button-icon icon-equalizer" id="filters-button"></button>
+    </div>
+
+    <div class="search-filters">
+      <div class="conector"></div>
+        <div class="filter-container">
+          <div class="filter-inputs right-separator lefty">
+            <input type="text" name="filter1" placeholder="random value" />
+            <input type="text" name="filter2" placeholder="random value" />
+            <input type="text" name="filter3" placeholder="random value" />
+          </div>
+
+          <div class="filter-inputs righty">
+            <input type="text" name="filter4" placeholder="random value" />
+            <input type="text" name="filter5" placeholder="random value" />
+            <input type="text" name="filter6" placeholder="random value" />
+          </div>
+
+          <div class="clear"></div>
         </div>
-
-        <div class="filter-inputs righty">
-          <input type="text" placeholder="random value" />
-          <input type="text" placeholder="random value" />
-          <input type="text" placeholder="random value" />
-
-        </div>
-
-        <div class="clear"></div>
-      </div>
-  </div>
+    </div>
+  </form>
 
   <div class="ads-main">
 

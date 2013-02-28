@@ -43,6 +43,18 @@ exports.moviesByRating = function(req, res){
   });
 };
 
+exports.moviesSearch = function(req, res){
+  var pageTo = req.params.page * 30;
+
+  console.log(JSON.parse(req.body.parameters));
+  MovieModel.find({ }).sort('-rating').limit(moviesPerPage).skip(pageTo).execFind(function(err, results){
+    if (!err)
+      res.render('apiMoviesPaginated', { m:  results, user: req.user });
+    else
+      console.log('Error: ' + err)
+  });
+};
+
 exports.movieToFavs = function(req, res){
 
   var favObject = new FavsModel({

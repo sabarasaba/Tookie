@@ -1,13 +1,10 @@
 $(document).ready(function(){
 
   // Open search filters.
-  $('#filters-button').click(function(){
-    $('.search-filters').fadeToggle('fast', function(){});
-  });
+  $('#filters-button').click(function(e){
+    e.preventDefault();
 
-  // Perform search action
-  $('#search-button').click(function(){
-    window.location.href = '/search/release-date';
+    $('.search-filters').fadeToggle('fast', function(){});
   });
 
   // Handle ad-blockers.
