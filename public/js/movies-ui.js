@@ -44,8 +44,7 @@ var getDataFromAPI = function(uri){
         $('.movies-container').append(html);
       }
       else{
-        console.log('Error on ajax call to api.');
-        console.log(html);
+        $('.movies-container').append('<div class="movie-separator" id="no-more"><p>There are no more movies :(</p></div>');
       }
     },
     error: function(jqXHR, textStatus, errorThrown){
@@ -111,8 +110,7 @@ var loadData = function(){
             $('.movies-container').append(html);
           }
           else{
-            console.log('Error on ajax call to api.');
-            console.log(html);
+            $('.movies-container').append('<div class="movie-separator" id="no-more"><p>There are no more movies :(</p></div>');
           }
         },
         error: function(jqXHR, textStatus, errorThrown){
@@ -134,9 +132,11 @@ var currentPage     = 0
 // Infinite scrolling event handler
 $(window).scroll(function(){
   if ((!callInProgress) && ($(window).scrollTop() == $(document).height() - $(window).height())){
-    displayLoading(function(){
-      loadData();
-    });
+    if ($('#no-more').length == 0){
+      displayLoading(function(){
+        loadData();
+      });
+    }
   }
 });
 

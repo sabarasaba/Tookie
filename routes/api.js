@@ -45,9 +45,9 @@ exports.moviesByRating = function(req, res){
 
 exports.moviesSearch = function(req, res){
   var pageTo = req.params.page * 30;
+  var  filtersObject = JSON.parse(req.body.parameters);
 
-  console.log(JSON.parse(req.body.parameters));
-  MovieModel.find({ }).sort('-rating').limit(moviesPerPage).skip(pageTo).execFind(function(err, results){
+  MovieModel.find({ title: new RegExp(filtersObject.q, 'i') }).sort('-rating').limit(moviesPerPage).skip(pageTo).execFind(function(err, results){
     if (!err)
       res.render('apiMoviesPaginated', { m:  results, user: req.user });
     else
