@@ -45,7 +45,7 @@ var share = function(where, title, image){
       var windowFeatures = "status=no,height=" + 250 + ",width=" + 600 + ",resizable=yes,left=" + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY=" + topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no";
       var u = location.href;
 
-      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + ' - ' + encodeURIComponent(u) + '&via=sabarasaba','sharer', windowFeatures);
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + ' - ' + encodeURIComponent(u) + '&via=TookieApp','sharer', windowFeatures);
     break;
 
     case 'gplus':
