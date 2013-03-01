@@ -2,6 +2,7 @@
 var mongoose       = require('mongoose')
   , MovieSchema    = require('../models/movie')
   , passport       = require('passport')
+  , nodeMailer     = require('nodemailer')
   , userModel      = require('../models/user')
   , FavsSchema     = require('../models/favs')
   , FeedbackSchema = require('../models/feedback');
@@ -12,6 +13,15 @@ var MovieModel    = mongoose.model('movie', MovieSchema.Movie);
 var UserModel     = mongoose.model('User', userModel.userSchema);
 var FeedbackModel = mongoose.model('Feedback', FeedbackSchema.Feedback);
 var FavsModel     = mongoose.model('Favs', FavsSchema.Favs);
+
+// create reusable transport method (opens pool of SMTP connections)
+var smtpTransport = nodeMailer.createTransport('SMTP',{
+    service: 'Gmail',
+    auth: {
+        user: 'tookieapp@gmail.com',
+        pass: 'tookietookietookietururu'
+    }
+});
 
 // General Routes
 
@@ -35,6 +45,29 @@ exports.login = function(req, res){
 
 exports.register = function(req, res){
   res.render('user/register', { title: 'Register -', user: req.user, message: req.flash('error') });
+};
+
+exports.forgotPassword = function(req, res){
+  var uri = '/api/resetPassword/user_id';
+
+  var mailOptions = {
+      from: 'Tookie App ✔ <tookieapp@gmail.com>',
+      to: 'rivasign@gmail.com',
+      subject: 'Tookie password reset',
+      text: 'Click here to reset your password: ' + uri,
+      html: ''
+  };
+
+  // send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, response){
+      if(error){
+          console.log(error);
+      }else{
+          console.log("Message sent: " + response.message);
+      }
+
+      smtpTransport.close();
+  });
 };
 
 exports.postRegister = function(req, res, next){
@@ -138,6 +171,7 @@ exports.adminFeedbacks = function(req, res){
 exports.adminUsers = function(req, res){
   UserModel.find({ }).sort('-created').exec(function(err, results){
     if (!err){
+      console.log(results);
       res.render('admin/users.ejs', { title: 'Admin Users -', user: req.user, u: results});
     }
     else{
@@ -250,3 +284,5 @@ exports.getFeedback = function(req, res){
       console.log(err);
   });
 };
+
+

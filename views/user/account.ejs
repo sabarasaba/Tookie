@@ -15,7 +15,7 @@
   <div class="account-content">
     <div class="account-user-sidebar lefty">
       <% if ((user !== undefined) && (paramUser.name === user.name)){ %>
-        <a href="https://en.gravatar.com/site/login" id="change-picture" title="Change your avatar at gravatar.com"> <img src="http://www.gravatar.com/avatar/<%= hashedEmail %>.jpg?s=300" alt="You're cute! :)" /> </a>
+        <a href="https://en.gravatar.com/site/login" target="_blank" id="change-picture" title="Change your avatar at gravatar.com"> <img src="http://www.gravatar.com/avatar/<%= hashedEmail %>.jpg?s=300" alt="You're cute! :)" /> </a>
         <p> Hi, <%= paramUser.name %> ! </p>
         <a href="#edit">[edit]</a>
       <% }else{ %>
@@ -27,13 +27,14 @@
 
     <div class="account-user-info lefty">
       <div class="account-user-info-display" id="user-content">
-        Email: <input type="text" name="username" value="<%= paramUser.email %>" readonly /><br>
-        Member since: <%= paramUser.created %><br>
-        Favourite movies: <%= favs.length %>
+        <p>Email: <input type="text" name="username" value="<%= paramUser.email %>" readonly /></p>
+        <p>Member since: <%= paramUser.created.toUTCString() %></p>
+        <p>Favourite movies: <%= favs.length %></p>
       </div>
 
       <div class="account-user-info-display hidden" style="display: none;" id="favs-content">
         <div class="movies-container">
+          <% if (favs.length !== 0){ %>
           <% favs.forEach(function(f){ %>
             <div class="movie-box">
               <a href="/movie/<%= f._movie[0]._id %>" target="_blank">
@@ -51,7 +52,9 @@
                 <div class="quality quality-bad" title="<%= f._movie[0].format %> quality."></div>
               <% }} %>
             </div>
-          <% }); %>
+          <% }); } else{ %>
+            <p>No favourite movies over here :(</p>
+          <% } %>
         </div>
       </div>
     </div>

@@ -130,6 +130,12 @@ app.get('/movie/feedback/:id', routes.getFeedback);
 app.get('/movie/feedback/:id/:type/:description', api.saveFeedback);
 
 
+// Handle deprecated URI'S
+app.get('/m/:id', function(req, res){
+  res.redirect('/movie/' + req.params.id);
+});
+
+
 // API Routes.
 
 app.get('/api/movie-to-favs/:userid/:movieid', api.movieToFavs);
@@ -157,6 +163,8 @@ app.post('/api/admin/updateMovie/:id', requireRole('admin'), api.updateMovie);
 app.get('/api/admin/deleteMovie/:id', requireRole('admin'), api.deleteMovie);
 
 app.get('/api/admin/deleteFeedback/:id', requireRole('admin'), api.deleteFeedback);
+
+app.get('/reset', routes.forgotPassword);
 
 
 

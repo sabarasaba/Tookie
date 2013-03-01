@@ -165,10 +165,11 @@ $('#admin-feedback-solve').fancybox({
     var makeAdmin = confirm('Are you sure you wanna make this user an admin?');
 
     if (makeAdmin){
-      makeUserAdmin($(this).parent().parent().children('td').eq(1).text(), true);
+      console.log('make admin');
+      makeUserAdmin($(this).parent().parent().children('td').eq(1).text().trim(), true);
     }
     else{
-      makeUserAdmin($(this).parent().parent().children('td').eq(1).text(), false);
+      makeUserAdmin($(this).parent().parent().children('td').eq(1).text().trim(), false);
     }
   });
 
@@ -179,7 +180,7 @@ $('#admin-feedback-solve').fancybox({
     var deleteUser = confirm('Are you sure you wanna delete this user?');
 
     if (deleteUser){
-      var uri = '/api/admin/deleteUser/' + $(this).parent().parent().children('td').eq(1).text();
+      var uri = '/api/admin/deleteUser/' + $(this).parent().parent().children('td').eq(1).text().trim();
 
       $.ajax({
         type: 'GET',

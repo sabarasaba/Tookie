@@ -111,7 +111,7 @@ exports.getMoviesForFeedback = function(req, res){
 
 exports.makeAdmin = function(req, res){
   var state = (req.params.state == 'true') ? 'admin' : 'user';
-
+  console.log(state);
   UserModel.update({ 'name': req.params.name }, { $set: { 'role': state } }, function(err){
     if (!err){
       console.log('User "' + req.params.name + '" is now an admin.');

@@ -27,6 +27,7 @@ a, a:visited{
   -o-transition: all 0.2s ease-out;
   color: #446DB2;
   text-decoration: none;
+  cursor: hand !important;
 }
 
 a:hover, a:active{

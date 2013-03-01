@@ -1,7 +1,7 @@
 <% m.forEach(function(movie){ %>
   <div class="movie-box">
     <a href="/movie/<%= movie._id %>" target="_blank">
-      <% if (movie.poster_medium == '../img/undefined.jpg'){ %>
+      <% if ((movie.poster_medium == '../img/undefined.jpg') || (movie.poster_medium == 'images/undefined.jpg')){ %>
         <div class="blank-square">Missing poster</div>
       <% }else{ %>
         <img src="<%= movie.poster_medium %>" />
