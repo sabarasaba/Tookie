@@ -143,6 +143,10 @@ input:focus
   background-color: red;
 }
 
+.margined-list{
+  margin-left: 50px;
+}
+
 /* Header Section */
 
 .header-menu{
