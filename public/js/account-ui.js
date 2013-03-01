@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  $('#change-picture').tipsy({gravity: 'n'});
+
   var enableTab = function(enable){
     $('.account-toolbar li').removeAttr('class');
     $(enable).addClass('selected');

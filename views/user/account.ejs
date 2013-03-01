@@ -1,4 +1,6 @@
 <% layout('../layout') -%>
+<% script('/js/libs/jquery.Tipsy/jquery.tipsy.js') -%>
+<% stylesheet('/js/libs/jquery.Tipsy/tipsy.css') -%>
 <% script('/js/account-ui.js') -%>
 
 
@@ -12,11 +14,13 @@
 
   <div class="account-content">
     <div class="account-user-sidebar lefty">
-      <a href="#profile_pic"> <img src="http://www.gravatar.com/avatar/<%= hashedEmail %>.jpg?s=300" alt="You're cute! :)" /> </a>
-
-      <p> Hi, <%= paramUser.name %> ! </p>
-
       <% if ((user !== undefined) && (paramUser.name === user.name)){ %>
+        <a href="https://en.gravatar.com/site/login" id="change-picture" title="Change your avatar at gravatar.com"> <img src="http://www.gravatar.com/avatar/<%= hashedEmail %>.jpg?s=300" alt="You're cute! :)" /> </a>
+        <p> Hi, <%= paramUser.name %> ! </p>
+        <a href="#edit">[edit]</a>
+      <% }else{ %>
+        <a href="#profile_pic"> <img src="http://www.gravatar.com/avatar/<%= hashedEmail %>.jpg?s=300" alt="Im cute! :)" /> </a>
+        <p> <%= paramUser.name %> </p>
         <a href="#edit">[edit]</a>
       <% } %>
     </div>
