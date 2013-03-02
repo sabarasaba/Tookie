@@ -8,7 +8,8 @@ var userSchema = new mongoose.Schema({
   password      : { type: String, required: true },
   role          : { type: String, default: 'user' },
   created       : { type: Date, default: Date.now },
-  favs          : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Favs' }]
+  favs          : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Favs' }],
+  resetToken    : { type: String }
 });
 
 // Bcrypt middleware

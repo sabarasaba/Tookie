@@ -101,6 +101,10 @@ input:focus
   display: none;
 }
 
+.color-blue{
+  color: blue !important;
+}
+
 .ads-main{
   width: 80%;
   margin: 20px auto;
@@ -549,6 +553,12 @@ input:focus
   display: inline-block;
   width: 99%;
   margin: 0 auto;
+}
+
+.login-box p{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 12px;
 }
 
 .flash-error{

@@ -8,6 +8,11 @@
       <p><%= message %></p>
     </div>
   <% } %>
+  <% if (info){ %>
+    <div class="flash-error color-blue">
+      <p><%= info %></p>
+    </div>
+  <% } %>
 
   <form action="/login" method="post">
     <div class="login-inputs">
@@ -18,7 +23,7 @@
       <div class="login-separator"></div>
 
       <div class="login-links lefty">
-        <a href="#forgot-password">Forgot password?</a>
+        <a href="/forgotpassword">Forgot password?</a>
         <a href="/register">Need an account?</a>
       </div>
 

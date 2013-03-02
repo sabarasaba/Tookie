@@ -1,4 +1,6 @@
 var mongoose       = require('mongoose')
+  , bcrypt = require('bcrypt')
+  , SALT_WORK_FACTOR = 10
   , MovieSchema    = require('../models/movie')
   , UserSchema     = require('../models/user')
   , FavsSchema     = require('../models/favs')
@@ -213,3 +215,31 @@ exports.deleteFeedback = function(req, res){
   });
 };
 
+exports.au = function(req, res){
+  UserModel.find({ }, function(err, r){
+    console.log(r);
+  });
+};
+
+
+exports.resetPassword = function(req, res){
+
+  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    if(err) return next(err);
+
+    bcrypt.hash(req.params.password, salt, function(err, hash) {
+      if(err) return next(err);
+
+      UserModel.update({ '_id': req.params.id, 'resetToken': req.params.token }, {$set: { 'password': hash, 'resetToken': '' }}, function(err){
+        if (!err){
+          req.flash('info', 'Password reseted!');
+          res.redirect('/login')
+        }
+        else{
+          console.log('error reseting password in API: ' + err);
+          res.redirect('/');
+        }
+      });
+    });
+  });
+};

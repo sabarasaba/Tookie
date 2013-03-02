@@ -90,13 +90,21 @@ app.get('/login', routes.login);
 
 app.get('/register', routes.register);
 
-app.post('/register', routes.postRegister);
+app.get('/forgotpassword', routes.forgot)
+
+app.get('/resetPassword/:id/:token', routes.saveNewPassword);
 
 app.get('/user/:name', routes.user);
 
 app.get('/logout', routes.logout);
 
 app.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), routes.postLogin);
+
+app.post('/register', routes.postRegister);
+
+app.post('/forgotPassword', routes.forgotPassword);
+
+app.get('/au', api.au);
 
 // Admin Panel
 
@@ -164,7 +172,7 @@ app.get('/api/admin/deleteMovie/:id', requireRole('admin'), api.deleteMovie);
 
 app.get('/api/admin/deleteFeedback/:id', requireRole('admin'), api.deleteFeedback);
 
-app.get('/reset', routes.forgotPassword);
+app.get('/api/resetPassword/:id/:token/:password', api.resetPassword)
 
 
 

@@ -18,4 +18,29 @@ $(document).ready(function(){
     });
   });
 
+  $('#submit-new-password').on('click', function(e){
+    e.preventDefault();
+
+    //app.get('/api/resetPassword/:id/:token/:password', api.resetPassword)
+    var uri = '/api/resetPassword/' + $('#id').val() + '/' + $('#token').val() + '/' + $('#password').val();
+
+    $.ajax({
+      type: 'GET',
+      url: uri,
+      dataType: 'text',
+      success: function(data, textStatus, jqXHR){
+        console.log('success');
+        console.log(data);
+        console.log(textStatus);
+
+        window.location.href = '/login';
+      },
+
+      error: function(jqXHR, textStatus, errorThrown){
+        console.log(textStatus);
+        console.log(errorThrown);
+      }
+    });
+  });
+
 });

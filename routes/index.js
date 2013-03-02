@@ -3,6 +3,7 @@ var mongoose       = require('mongoose')
   , MovieSchema    = require('../models/movie')
   , passport       = require('passport')
   , nodeMailer     = require('nodemailer')
+  , crypto         = require('crypto')
   , userModel      = require('../models/user')
   , FavsSchema     = require('../models/favs')
   , FeedbackSchema = require('../models/feedback');
@@ -40,33 +41,78 @@ exports.changelog = function(req, res){
 // User Routes
 
 exports.login = function(req, res){
-  res.render('user/login', { title: 'Login -', user: req.user, message: req.flash('error') });
+  res.render('user/login', { title: 'Login -', user: req.user, message: req.flash('error'), info: req.flash('info') });
 };
 
 exports.register = function(req, res){
   res.render('user/register', { title: 'Register -', user: req.user, message: req.flash('error') });
 };
 
-exports.forgotPassword = function(req, res){
-  var uri = '/api/resetPassword/user_id';
+exports.forgot = function(req, res){
+  res.render('user/forgot', { title: 'Forgot Password -', user: req.user, message: req.flash('error') });
+};
 
-  var mailOptions = {
-      from: 'Tookie App ✔ <tookieapp@gmail.com>',
-      to: 'rivasign@gmail.com',
-      subject: 'Tookie password reset',
-      text: 'Click here to reset your password: ' + uri,
-      html: ''
+exports.forgotPassword = function(req, res){
+  UserModel.findOne({ 'email': req.body.email }, function(err, doc){
+    if (!err && doc !== null){
+      crypto.randomBytes(16, function(ex, buff){
+        var token = buff.toString('hex');
+
+        UserModel.update({ 'name': doc.name }, { $set: { 'resetToken': token } }, function(err){
+          if (!err){
+            var uri = req.headers.origin + '/resetPassword/' + doc._id + '/' + token;
+
+            var mailOptions = {
+              from: 'Tookie App ✔ <tookieapp@gmail.com>',
+              to: doc.email,
+              subject: 'Tookie password reset',
+              text: 'Click here to reset your password: ' + uri
+            };
+
+            // send mail with defined transport object
+            smtpTransport.sendMail(mailOptions, function(error, response){
+              if(!error){
+                console.log("Message sent: " + response.message);
+
+                req.flash('info', "You're going to recive an email with a password reset link.");
+                res.redirect('/login');
+              }
+              else{
+                console.log(error);
+
+                req.flash('error', 'There was a problem sending the email.');
+                res.redirect('/forgotpassword');
+              }
+
+              //smtpTransport.close();
+            });
+          }
+          else{
+            console.log('Error updating token of user: ' + err);
+          }
+        });
+      });
+    }
+    else{
+      req.flash('error', 'That email is not associated with any user.');
+      res.redirect('/forgotpassword');
+    }
+  });
+};
+
+exports.saveNewPassword = function(req, res){
+  var userDataObject = {
+    id: req.params.id,
+    token: req.params.token
   };
 
-  // send mail with defined transport object
-  smtpTransport.sendMail(mailOptions, function(error, response){
-      if(error){
-          console.log(error);
-      }else{
-          console.log("Message sent: " + response.message);
-      }
-
-      smtpTransport.close();
+  UserModel.findOne({ '_id': userDataObject.id, 'resetToken': userDataObject.token }, function(err, doc){
+    if (!err && doc !== null){
+      res.render('user/savePassword', { title: 'Set new password -', user: req.user, userData: userDataObject });
+    }
+    else{
+      res.redirect('/');
+    }
   });
 };
 

@@ -13,6 +13,7 @@
     "passport-local": "*",
     "connect-flash": "*",
     "bcrypt": "*",
+    "crypto": "*",
     "async": "0.1.x",
     "request": "2.9.x",
     "mongoose": "*",
