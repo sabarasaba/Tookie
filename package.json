@@ -1,5 +1,5 @@
 {
-  "name": "tookie-beta",
+  "name": "tookie",
   "version": "1.0.0-3",
   "private": false,
   "scripts": {
@@ -27,5 +27,5 @@
     "node": "*",
     "npm": "*"
   },
-  "subdomain": "tookie-beta"
+  "subdomain": "tookie"
 }

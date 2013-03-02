@@ -1,8 +1,4 @@
 
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , routes = require('./routes')
   , api = require('./routes/api')
@@ -11,10 +7,14 @@ var express = require('express')
   , path = require('path')
   , flash = require('connect-flash')
   , passport = require('passport')
+  , worker = require('./worker.js')
   , LocalStrategy = require('passport-local').Strategy
   , mongoose    = require('mongoose')
   , userModel = require('./models/user');
 
+
+
+var tickTime = 10800000; //3 hours
 
 var User = mongoose.model('User', userModel.userSchema);
 
@@ -189,6 +189,11 @@ function requireRole(role) {
       res.redirect('/');
   }
 };
+
+
+setInterval(function () {
+    worker.fetchData();
+}, tickTime);
 
 
 http.createServer(app).listen(app.get('port'), function(){
