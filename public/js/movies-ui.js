@@ -92,6 +92,11 @@ var loadData = function(){
         filter6: getURLParameter('filter6'),
       };
 
+      if (paramsObject.q === null){
+        history.pushState(null, null, "/search/added-date");
+        location.reload();
+      }
+
       var startTime = new Date().getTime();
       $.ajax({
         type: 'POST',
