@@ -1,4 +1,6 @@
 <% layout('layout') -%>
+<% script('/js/libs/jquery.Tipsy/jquery.tipsy.js') -%>
+<% stylesheet('/js/libs/jquery.Tipsy/tipsy.css') -%>
 <% script('/js/main-ui.js') -%>
 
 <div class="search-box">
@@ -6,8 +8,8 @@
   <form action="/search" method="get">
     <div class="search-bar">
       <input type="text" id="searchField" name="q" class="default-input" />
-      <button class="button-icon icon-magnifying-glass" id="search-button" type="submit"></button>
-      <button class="button-icon icon-equalizer" id="filters-button"></button>
+      <button class="button-icon icon-magnifying-glass" id="search-button" type="submit" title="Search"></button>
+      <button class="button-icon icon-equalizer" id="filters-button" title="Filters"></button>
     </div>
 
     <div class="search-filters">

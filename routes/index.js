@@ -19,8 +19,8 @@ var FavsModel     = mongoose.model('Favs', FavsSchema.Favs);
 var smtpTransport = nodeMailer.createTransport('SMTP',{
     service: 'Gmail',
     auth: {
-        user: 'tookieapp@gmail.com',
-        pass: 'tookietookietookietururu'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 

@@ -1,3 +1,9 @@
+
+$('.button-icon').tipsy({
+  trigger: 'hover',
+  gravity: 's'
+});
+
 $(document).ready(function(){
 
   // Open search filters.
