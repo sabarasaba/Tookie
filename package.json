@@ -1,6 +1,6 @@
 {
   "name": "tookie",
-  "version": "1.0.0-3",
+  "version": "1.0.0-4",
   "private": false,
   "scripts": {
     "start": "node app.js"
@@ -19,9 +19,6 @@
     "mongoose": "*",
     "nodemailer": "*",
     "mongodb": "*"
-  },
-  "env": {
-    "PYTHON": "/opt/local/bin/python2.7"
   },
   "engines": {
     "node": "*",

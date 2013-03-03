@@ -164,7 +164,7 @@ app.get('/api/admin/makeAdmin/:name/:state', requireRole('admin'), api.makeAdmin
 
 app.get('/api/admin/deleteUser/:name', requireRole('admin'), api.deleteUser);
 
-app.post('/api/admin/updateFeedback/:id', requireRole('admin'), api.updateFeedback);
+app.post('/api/admin/updateFeedback/:id/:user', requireRole('admin'), api.updateFeedback);
 
 app.post('/api/admin/updateMovie/:id', requireRole('admin'), api.updateMovie);
 

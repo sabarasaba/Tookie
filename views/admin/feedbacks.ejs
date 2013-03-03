@@ -32,7 +32,7 @@
             <td><%= index %></td>
             <td><%= feedback._movie[0].title %></td>
             <td><%= feedback.type %></td>
-            <td><%= feedback.description.substr(0, 40) + '..' %></td>
+            <td><%= feedback.description %></td>
             <td class="admin-action-icons">
               <a href="/admin/feedback/solve/<%= feedback._id %>" data-fancybox-type="iframe" id="admin-feedback-solve" class="icon-edit"></a>
               <a href="#ignore" data-feedbackID="<%= feedback._id %>" id="admin-feedback-delete" class="icon-minus-sign"></a>
