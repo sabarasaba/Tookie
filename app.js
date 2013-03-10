@@ -1,17 +1,17 @@
 // hello
 
-var express = require('express')
-  , routes = require('./routes')
-  , api = require('./routes/api')
-  , eng = require('ejs-locals')
-  , http = require('http')
-  , path = require('path')
-  , flash = require('connect-flash')
-  , passport = require('passport')
-  , worker = require('./worker.js')
+var express       = require('express')
+  , routes        = require('./routes')
+  , api           = require('./routes/api')
+  , eng           = require('ejs-locals')
+  , http          = require('http')
+  , path          = require('path')
+  , flash         = require('connect-flash')
+  , passport      = require('passport')
+  , worker        = require('./worker.js')
   , LocalStrategy = require('passport-local').Strategy
-  , mongoose    = require('mongoose')
-  , userModel = require('./models/user');
+  , mongoose      = require('mongoose')
+  , userModel     = require('./models/user');
 
 
 
@@ -21,7 +21,7 @@ var User = mongoose.model('User', userModel.userSchema);
 
 
 // Passport session setup.
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
