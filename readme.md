@@ -1,4 +1,4 @@
-[Tookie](http://tookie.jit.su/)
+[Tookie](http://tookieapp.rs.af.cm/)
 =================
 
 Tookie is a meta-search engine that indexes movie torrents from torrentz and presents all the information in a beautiful and responsive UI. It allows the user to view the information of the latest movies available out there along with the respective metadata (trailer, cast, release date, etc). And it also provides an external link to a .torrent file or a magnet link for downloading the movie.
@@ -9,7 +9,7 @@ Tookie runs a worker every 3 hours who indexes all the new movies available in t
 Live Site
 ---------
 
-Tookie is currently deployed to nodejitsu. You can check the live site at http://tookie.jit.su/
+Tookie is currently deployed to nodejitsu. You can check the live site at http://tookieapp.rs.af.cm/
 
 Configuration
 --------------
