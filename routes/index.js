@@ -125,7 +125,7 @@ exports.postRegister = function(req, res, next){
       console.log(err);
 
       req.flash('error', 'That user is already registered.');
-       return res.redirect('/register')
+       return res.redirect('/register');
     } else {
       console.log('user: ' + user.name + " saved.");
 
@@ -217,7 +217,6 @@ exports.adminFeedbacks = function(req, res){
 exports.adminUsers = function(req, res){
   UserModel.find({ }).sort('-created').exec(function(err, results){
     if (!err){
-      console.log(results);
       res.render('admin/users.ejs', { title: 'Admin Users -', user: req.user, u: results});
     }
     else{

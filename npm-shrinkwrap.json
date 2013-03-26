@@ -1,0 +1,190 @@
+{
+  "name": "tookie",
+  "version": "1.0.0-4",
+  "dependencies": {
+    "express": {
+      "version": "3.0.5",
+      "dependencies": {
+        "connect": {
+          "version": "2.7.1",
+          "dependencies": {
+            "qs": {
+              "version": "0.5.1"
+            },
+            "formidable": {
+              "version": "1.0.11"
+            },
+            "crc": {
+              "version": "0.2.0"
+            },
+            "bytes": {
+              "version": "0.1.0"
+            },
+            "pause": {
+              "version": "0.0.1"
+            },
+            "debug": {
+              "version": "0.7.2"
+            }
+          }
+        },
+        "commander": {
+          "version": "0.6.1"
+        },
+        "range-parser": {
+          "version": "0.0.4"
+        },
+        "mkdirp": {
+          "version": "0.3.3"
+        },
+        "cookie": {
+          "version": "0.0.5"
+        },
+        "buffer-crc32": {
+          "version": "0.1.1"
+        },
+        "fresh": {
+          "version": "0.1.0"
+        },
+        "methods": {
+          "version": "0.0.1"
+        },
+        "send": {
+          "version": "0.1.0",
+          "dependencies": {
+            "debug": {
+              "version": "0.7.2"
+            },
+            "mime": {
+              "version": "1.2.6"
+            }
+          }
+        },
+        "cookie-signature": {
+          "version": "0.0.1"
+        },
+        "debug": {
+          "version": "0.7.2"
+        }
+      }
+    },
+    "ejs": {
+      "version": "0.7.2"
+    },
+    "ejs-locals": {
+      "version": "0.1.6"
+    },
+    "passport": {
+      "version": "0.1.15",
+      "dependencies": {
+        "pkginfo": {
+          "version": "0.2.3"
+        }
+      }
+    },
+    "passport-local": {
+      "version": "0.1.6",
+      "dependencies": {
+        "pkginfo": {
+          "version": "0.2.3"
+        },
+        "passport": {
+          "version": "0.1.15"
+        }
+      }
+    },
+    "connect-flash": {
+      "version": "0.1.0"
+    },
+    "bcrypt": {
+      "version": "0.7.3",
+      "dependencies": {
+        "bindings": {
+          "version": "1.0.0"
+        }
+      }
+    },
+    "crypto": {
+      "version": "0.0.3"
+    },
+    "async": {
+      "version": "0.1.22"
+    },
+    "request": {
+      "version": "2.9.203"
+    },
+    "mongoose": {
+      "version": "3.5.5",
+      "dependencies": {
+        "hooks": {
+          "version": "0.2.1"
+        },
+        "ms": {
+          "version": "0.1.0"
+        },
+        "sliced": {
+          "version": "0.0.3"
+        },
+        "muri": {
+          "version": "0.1.0"
+        }
+      }
+    },
+    "nodemailer": {
+      "version": "0.3.43",
+      "dependencies": {
+        "mailcomposer": {
+          "version": "0.1.29",
+          "dependencies": {
+            "mimelib": {
+              "version": "0.2.10",
+              "dependencies": {
+                "encoding": {
+                  "version": "0.1.5",
+                  "dependencies": {
+                    "iconv-lite": {
+                      "version": "0.2.7"
+                    }
+                  }
+                },
+                "addressparser": {
+                  "version": "0.1.3"
+                }
+              }
+            },
+            "mime": {
+              "version": "1.2.9"
+            }
+          }
+        },
+        "simplesmtp": {
+          "version": "0.2.3",
+          "dependencies": {
+            "rai": {
+              "version": "0.1.7"
+            },
+            "xoauth2": {
+              "version": "0.1.6"
+            }
+          }
+        },
+        "optimist": {
+          "version": "0.3.5",
+          "dependencies": {
+            "wordwrap": {
+              "version": "0.0.2"
+            }
+          }
+        }
+      }
+    },
+    "mongodb": {
+      "version": "1.2.11",
+      "dependencies": {
+        "bson": {
+          "version": "0.1.6"
+        }
+      }
+    }
+  }
+}

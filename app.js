@@ -60,13 +60,26 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
 
-
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: 'keyboard cat dawg', cookie: { maxAge: 43200000 } }));
+  app.use(express.cookieParser('your secret here'));
+  app.use(express.session());
   app.use(flash());
+
+  // app.use(express.cookieParser());
+  // app.use(express.session({ secret: 'keyboard cat dawg', cookie: { maxAge: 43200000 } }));
+
 
   app.use(passport.initialize());
   app.use(passport.session());
+
+
+    // app.use(express.cookieParser('your secret here'));
+
+    // app.use(passport.initialize());
+    // app.use(passport.session());
+    // app.use(flash());
+    // app.use(app.router);
+    // app.use(express.static(path.join(__dirname, 'public')));
+    // app.use('/test', express.static(path.join(__dirname, 'test')));
 
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
@@ -91,7 +104,7 @@ app.get('/login', routes.login);
 
 app.get('/register', routes.register);
 
-app.get('/forgotpassword', routes.forgot)
+app.get('/forgotpassword', routes.forgot);
 
 app.get('/resetPassword/:id/:token', routes.saveNewPassword);
 
@@ -173,14 +186,14 @@ app.get('/api/admin/deleteMovie/:id', requireRole('admin'), api.deleteMovie);
 
 app.get('/api/admin/deleteFeedback/:id', requireRole('admin'), api.deleteFeedback);
 
-app.get('/api/resetPassword/:id/:token/:password', api.resetPassword)
+app.get('/api/resetPassword/:id/:token/:password', api.resetPassword);
 
 
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
-};
+  res.redirect('/login');
+}
 
 function requireRole(role) {
   return function(req, res, next) {
@@ -188,8 +201,8 @@ function requireRole(role) {
       next();
     else
       res.redirect('/');
-  }
-};
+  };
+}
 
 
 setInterval(function () {
