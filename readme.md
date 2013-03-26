@@ -9,7 +9,7 @@ Tookie runs a worker every 3 hours who indexes all the new movies available in t
 Live Site
 ---------
 
-Tookie is currently deployed to nodejitsu. You can check the live site at http://tookieapp.rs.af.cm/
+Tookie is currently deployed to nodejitsu. You can check the live site at http://www.tookieapp.net/
 
 Configuration
 --------------
