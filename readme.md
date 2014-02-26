@@ -1,3 +1,6 @@
+# Project no longer maintained
+I wrote the code when I started learning node and that's why it sucks.
+
 [Tookie](http://tookieapp.rs.af.cm/)
 =================
 
